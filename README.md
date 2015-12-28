@@ -1,32 +1,33 @@
 # RIT Sailing Website
 The is the website created for the RIT Sailing club
-It is written in javascript and uses a framework called [keystone.js](http://keystonejs.com/)
+It is written in python and uses a framework called [Django](https://www.djangoproject.com/)
 
 ## Requirements
-This project requires [node.js](https://nodejs.org/en/download/) and [mongodb](https://www.mongodb.org/downloads#production) to run.
+This project requires [python](https://www.python.org/downloads/) to run (can be 2 or 3).
 
 ## Setup
 After you clone the repo please run the following commands to install the dependencies.
 ```bash
-$ npm install
-$ mkdir data
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ python manage.py loaddata data.json
 ```
-Also in order for the project to run you need to download the [.env file](https://drive.google.com/a/g.rit.edu/file/d/0B3XhKKD9_3WmWXV2ejJkRm41bDg/view?usp=sharing) and place it in the root of the project.
+#### Troubleshooting
+If you do not have pip installed with python grab it [here](https://pip.pypa.io/en/stable/installing/).
 
 ## Usage
-To run the site, just enter the following commands in **two separate command windows**:
+To run the site, just enter the following command:
 ```bash
-$ mongod -dbpath data
-$ node keystone
+$ python manage.py runserver
 ```
-This should start a development server on you machine on the port 3000.
-To view the site just goto [localhost:3000](http://localhost:3000/).
+This should start a development server on you machine on the port 8000.
+To view the site just goto [localhost:8000](http://localhost:8000/).
 
-The admin panel for keystone is located at [/keystone](localhost:3000/keystone).
+The admin panel is located at [/admin](http://localhost:8000/admin/).
 To log in use these credentials:
 ```
-username: admin@admin.com
-password: pass
+username: admin
+password: thisisapass
 ```
 
 ## Issues and Feature Requests
