@@ -1,0 +1,61 @@
+include ../mixins/flash-messages
+
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		title RIT Sailing
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', type='text/css', href='/assets/css/jquery.mmenu.css')
+		link(rel='stylesheet', type='text/css', href='/assets/css/jquery.mmenu.positioning.css')
+		link(rel='stylesheet', type='text/css', href='/assets/css/jquery.mmenu.dragopen.css')
+		link(href="/styles/site.min.css", rel="stylesheet")
+		if user && user.canAccessKeystone
+			link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
+	body
+		nav#sidebar
+			.sidebar-wrapper
+				img.logo(src='/assets/images/logo.png')
+				.nav
+					.item
+						a(href='/') Blog
+					.item
+						a(href='/members') Members
+					.item
+						a(href='/events') Events
+					.item
+						a(href='/files') Files
+				#signin.footer
+					if user
+						.avatar
+							img(src='/assets/images/avatar.jpg')
+							.heading
+								| #{user.name.first} #{user.name.last}
+								if user.isEboard
+									span #{user.eboard_pos}
+						a(href='/signout').sign Sign Out
+					else
+						a(href='/signin').sign Sign In
+		#content
+			block nav
+			#main
+				block main
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		// Include all compiled plugins (below), or include individual files as needed
+		script(src='/assets/js/hammer.min.js')
+		script(src='/assets/js/bootstrap.min.js')
+		script(src='/assets/js/jquery.mmenu.min.js')
+		script(src='/assets/js/jquery.mmenu.dragopen.js')
+		script(src='/assets/js/jquery.mmenu.dragclose.min.js')
+		script(src='/js/base.js')
+
+		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
+		//- which generate links to edit content for users who can access Keystone
+		if user && user.canAccessKeystone
+			script(src='/keystone/js/content/editor.js')
+
+		//- Add scripts that are globally required by your site here.
+
+		//- Include template-specific javascript files by extending the js block
+		block js

@@ -1,0 +1,228 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100);
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700);
+
+html {
+  height: 100%;
+}
+
+.mm-panels > .mm-panel {
+  padding: 0;
+}
+
+body {
+  font-family: Arimo;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+#sidebar {
+  flex: 0 1 auto;
+  width: 30em;
+  height: 100%;
+  background: url('images/boat.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+#sidebar:before{
+  position: absolute;
+  content:" ";
+  top:0;
+  left:0;
+  width:30em;
+  height:100%;
+  display: block;
+  z-index:0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.sidebar-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.logo {
+  position: relative;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  flex-flow: column;
+  margin-top: 2em;
+}
+
+.nav .item {
+  display: -webkit-box;
+  flex: 1 1 auto;
+  position: relative;
+}
+
+  .nav .item a {
+    display: block;
+    width: 100%;
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #fff;
+    padding: .1em 1em;
+    -webkit-transition: color .25s;
+    transition: color .25s;
+  }
+
+      .nav .item:hover a {
+        color: #c6c6c6;
+        text-decoration: none;
+      }
+
+      .nav .item:active a {
+        color: #c6c6c6;
+        text-decoration: none;
+      }
+
+      .nav .item.active a {
+        background: #f05a27;
+      }
+
+      .nav .item.active:hover a {
+        color: #fff;
+      }
+
+    .nav .item.active:after {
+      background-repeat: no-repeat;
+  		background-size: 100% 100%;
+  		content: '';
+  		height: 2em;
+  		position: absolute;
+  		width: 2em;
+      float: right;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='0,0 50,50 0,100' style='fill:#f05a27;' /%3E%3C/svg%3E");
+    }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  background: rgba(70,70,70,.8);
+  width: 100%;
+  padding: .5em 1em;
+}
+
+  .footer .avatar {
+    position: relative;
+    color: #fff;
+  }
+
+  .footer .avatar .heading span{
+    color: #f8f8f8;
+  }
+
+  .footer .sign {
+    font-family: Roboto;
+    font-weight: 300;
+    background: #f05a27;
+    border: none;
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    padding: .45em 1.25em;
+    font-size: 12px;
+    -webkit-transition: background .25s;
+    transition: background .25s;
+  }
+
+  .footer .sign:hover {
+    background: #D03C0A;
+  }
+
+.avatar {
+  display: -webkit-box;
+}
+
+  .avatar img{
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+  }
+
+  img.avatar {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+  }
+
+  .avatar .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: .5em;
+  }
+
+  .avatar .heading span{
+    text-transform: uppercase;
+    color: #5A5A5A;
+    font-style: italic;
+    font-size: 10px;
+  }
+
+
+#content {
+  flex: 1 1 auto;
+  background: #fff;
+  overflow-y: auto;
+  position: relative;
+}
+
+.navbar {
+  box-shadow: none;
+  position: relative;
+}
+
+.navbar .breadcrumb {
+  background: none;
+  margin-bottom: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-circle {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1.42;
+  border-radius: 50%;
+}
+
+#drag-node {
+  width: 2em;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #ccc;
+  z-index: 100000000;
+}
+
+@media screen and (max-width: 1000px) {
+  #sidebar {
+    max-width: 30em;
+    min-width: 21em;
+    width: 30%;
+  }
+}

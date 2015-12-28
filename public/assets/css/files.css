@@ -1,0 +1,24 @@
+.files {
+  padding: 3em;
+}
+.file {
+  position: relative;
+}
+
+  .file i {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .file .description {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .file .description span {
+    font-size: 12px;
+    font-weight: 300;
+  }
