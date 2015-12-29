@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title>RIT Sailing | Files</title>{% endblock %}
+{% block css %}<link rel="stylesheet" href="assets/css/files.css">{% endblock %}
+{% block content %}
+<nav class="navbar navbar-default navbar-fixed-top" data-spy="affix">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Files</a>
+    <div class="navbar-left">
+      <ol class="breadcrumb">
+        <li class="active">root</li>
+      </ol>
+    </div>
+    <form class="navbar-form navbar-right" role="search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</nav>
+<div id="main">
+  <div class="files container-fluid">
+    <div class="row">
+
+      <div class="col-md-2">
+        <div class="file panel panel-default">
+          <div class="panel-body">
+            <i class="fa fa-5x fa-folder"></i>
+          </div>
+          <div class="description panel-footer">
+            Folder Name
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="file panel panel-default">
+          <div class="panel-body">
+            <i class="fa fa-5x fa-folder"></i>
+          </div>
+          <div class="description panel-footer">
+            Folder Name
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="file panel panel-default">
+          <div class="panel-body">
+            <i class="fa fa-5x fa-file-word-o"></i>
+          </div>
+          <div class="description panel-footer">
+            File Name
+            <span>File Description</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+  $('[data-toggle="tooltip"]').tooltip();
+</script>
+{% endblock %}

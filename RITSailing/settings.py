@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'main'
 ]
 
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
@@ -58,7 +59,6 @@ ROOT_URLCONF = 'RITSailing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'RITSailing.wsgi.application'
 
+# AUTH_USER_MODEL = 'main.models.Users'
+# SOCIAL_AUTH_USER_MODEL = 'main.models.TeamMember'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -90,8 +92,19 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1064425529245-pqim9pko5o98p7v5u4mplaa312enh5f7.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'bAnVpzoxX0QzixRepC8LNaAx'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1064425529245-pqim9pko5o98p7v5u4mplaa312enh5f7'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nPlHXdbLreHiImw7F3oP5tpS'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'main.views.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -130,3 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'

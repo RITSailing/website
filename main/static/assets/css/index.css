@@ -1,0 +1,14 @@
+.post header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid #000 1px;
+  padding: 1em;
+  margin: 0 2em;
+}
+
+#date span {
+  color: #5A5A5A;
+  margin-right: .5em;
+}

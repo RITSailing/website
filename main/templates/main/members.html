@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% block title %}<title>RIT Sailing | Members</title>{% endblock %}
+{% block css %}<link rel="stylesheet" href="assets/css/index.css">{% endblock %}
+{% block content %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Members</a>
+    <div class="navbar-left">
+
+    </div>
+    <form class="navbar-form navbar-right" role="search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</nav>
+<div id="main">
+  <div class="files container-fluid">
+
+  </div>
+</div>
+{% endblock %}
