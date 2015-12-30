@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
-from social.pipeline.social_auth import social_user
+from social.pipeline.user import USER_FIELDS
 from social.exceptions import AuthForbidden
 from models import TeamMember, Request
 from responseutils import HttpRedirectException
@@ -27,71 +27,44 @@ def auth_allowed(backend, details, response, *args, **kwargs):
 # DO NOT TOUCH
 # This is a method overide for the associate_user step in the social authentication pipline
 # It is overrided so that we can create a new TeamMember object to go with the created user
-def associate_user(backend, uid, user=None, social=None, *args, **kwargs):
-	member = TeamMember.objects.create_member(user)
-	if user and not social:
-		try:
-			social = backend.strategy.storage.user.create_social_auth(
-				user, uid, backend.name
-			)
-		except Exception as err:
-			if not backend.strategy.storage.is_integrity_error(err):
-				raise
-			# Protect for possible race condition, those bastard with FTL
-			# clicking capabilities, check issue #131:
-			#   https://github.com/omab/django-social-auth/issues/131
-			return social_user(backend, uid, user, *args, **kwargs)
-		else:
-			return {'social': social,
-					'user': social.user,
-					'member': member,
-					'new_association': True}
+def create_user(strategy, details, user=None, *args, **kwargs):
+	if user:
+		member = TeamMember.objects.get_or_create(user=user)
+		fill_member_info(kwargs['response']['image'], member[0], details.get('email'))
+		return {'is_new': False}
 
-# DO NOT TOUCH
-# This is a method overide for the user_details step in the social authentication pipline
-# It is overrided so that we can fill the new TeamMember object with the information gathered from the login
-def user_details(strategy, details, user=None, member=None, *args, **kwargs):
-	"""Update user details using data from provider."""
-	image = kwargs['response']['image']
-	if not member:
-		member = TeamMember.objects.get(user=user)
+	fields = dict((name, kwargs.get(name) or details.get(name))
+				  for name in strategy.setting('USER_FIELDS',
+											   USER_FIELDS))
+	if not fields:
+		return
+
+	user = strategy.create_user(**fields)
+	member = TeamMember.objects.get_or_create(user=user)
+	fill_member_info(kwargs['response']['image'], member[0], details.get('email'))
+
+	return {
+		'is_new': True,
+		'user': user
+	}
+
+def fill_member_info(image, member, email):
 	member.avatar = image['url'].split('?')[0]
-
 	# Delete the Request of the user that is being moved to member
-	email = details.get('email')
 	if Request.objects.filter(email=email).first():
 		request = Request.objects.get(email=email)
 		member.year_level = request.year_level
 		request.delete()
 	member.save()
 	send_conformation_email(email)
-	if user:
-		changed = False  # flag to track changes
-		protected = ('username', 'id', 'pk', 'email') + \
-			tuple(strategy.setting('PROTECTED_USER_FIELDS', []))
-
-		# Update user model attributes with the new data sent by the current
-		# provider. Update on some attributes is disabled by default, for
-		# example username and id fields. It's also possible to disable update
-		# on fields defined in SOCIAL_AUTH_PROTECTED_FIELDS.
-		for name, value in details.items():
-			if value and hasattr(user, name):
-				# Check https://github.com/omab/python-social-auth/issues/671
-				current_value = getattr(user, name, None)
-				if not current_value or name not in protected:
-					changed |= current_value != value
-					setattr(user, name, value)
-
-		if changed:
-			strategy.storage.user.changed(user)
 
 def send_conformation_email(email):
 	# TODO send the person a conformation email telling them that they signed up
-	placeholder
+	placeholder = None
 
 def page(request, template):
 	member = None
-	if request.user.is_authenticated():
+	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
 	return render(request, template, {'member':member})
 

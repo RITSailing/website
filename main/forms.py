@@ -30,7 +30,7 @@ class RegisterForm(forms.Form):
             cleaned_data['email'] = email.split('@', 1)[0] + '@g.rit.edu'
         return cleaned_data
 
-    def save(self):
+    def save(self, *args, **kwargs):
         email = self.cleaned_data['email']
         first_name = self.cleaned_data['first_name']
         last_name = self.cleaned_data['last_name']

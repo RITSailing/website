@@ -62,11 +62,11 @@ class Request(models.Model):
     objects = RequestManager()
     def __str__(self):
         return str(self.first_name) + " " + str(self.last_name)
-    def save(self, force_insert=False, force_update=False):
+    def save(self, **kwargs):
         if self.accepted and not self.was_checked:
             # TODO Email person to tell them they were accepted
             self.was_checked = True
         elif not self.accepted and self.was_checked:
             # Fired on uncheck if needed later on
             self.was_checked = False
-        super(Request, self).save(force_insert, force_update)
+        super(Request, self).save(kwargs)

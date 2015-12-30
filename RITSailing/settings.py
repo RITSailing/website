@@ -102,9 +102,11 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_uid',
     'main.views.auth_allowed',
     'social.pipeline.social_auth.social_user',
-    'main.views.associate_user',
+    'social.pipeline.user.get_username',
+    'main.views.create_user',
+    'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
-    'main.views.user_details',
+    'social.pipeline.user.user_details',
 )
 
 # Password validation
