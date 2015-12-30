@@ -149,6 +149,10 @@ body {
     text-decoration: none;
   }
 
+  .footer .reg {
+    color: #FB7C50;
+  }
+
 .avatar {
   display: -webkit-box;
 }

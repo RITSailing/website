@@ -16,17 +16,20 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth.views import logout
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
+from main import views
 
-urlpatterns = patterns('',
-    url(r'^/', 'main.views.home'),
-    url(r'^events/', 'main.views.events'),
-    url(r'^files/', 'main.views.files'),
-    url(r'^members/', 'main.views.members'),
-    url(r'^register/', 'main.views.register'),
-    url(r'^logout/', 'django.contrib.auth.views.logout'),
+urlpatterns = [
+    url(r'^$', views.page, {"template":"main/base.html"}),
+    url(r'^events/$', views.page, {"template":"main/events.html"}),
+    url(r'^files/$', views.page, {"template":"main/files.html"}),
+    url(r'^members/$', views.page, {"template":"main/members.html"}),
+    url(r'^register/success/$', views.page, {"template":"main/success.html"}),
+    url(r'^register/$', views.register, name="register"),
+    url(r'^logout/$', logout),
 	url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RIT Sailing | Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/select/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font/font-awesome.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap-theme.css"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/error.css' %}">
+  </head>
+  <body>
+    <div class="video-wrapper">
+      <video autoplay onended='replay()' muted poster="{% static 'assets/css/images/static.png' %}" id="bgvid">
+        <source src="{% static 'assets/video/timelapse.webg' %}" type="video/webg">
+          <source src="{% static 'assets/video/timelapse.mp4' %}" type="video/mp4">
+      </video>
+    </div>
+    <img class="logo" src="{% static 'assets/images/logo.png' %}">
+    <h1>403</h1>
+    <h2>You cannont access this part of the site</h2>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+      function replay() {
+        document.getElementsByTagName('video').currentTime = 0.1;
+        document.getElementsByTagName('video')[0].play();
+      }
+    </script>
+  </body>
+</html>
