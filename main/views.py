@@ -68,9 +68,10 @@ def send_conformation_email(email):
 
 def page(request, template):
 	member = None
+	members = TeamMember.objects.all()
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, template, {'member':member})
+	return render(request, template, {'members':members, 'member':member})
 
 def profile(request, username):
 	user = get_object_or_404(User, username=username)
