@@ -121,31 +121,6 @@ body {
   height: 5em;
 }
 
-  .footer .sign {
-    font-family: Roboto;
-    font-weight: 300;
-    background: #f05a27;
-    border: none;
-    border-radius: 15px;
-    text-transform: uppercase;
-    color: #fff;
-    padding: .45em 1.25em;
-    font-size: 12px;
-    -webkit-transition: background .25s;
-    transition: background .25s;
-  }
-
-  .footer .sign:hover {
-    background: #D03C0A;
-    text-decoration: none;
-  }
-
-  .footer .sign:focus {
-    background: #D03C0A;
-    outline: none;
-    text-decoration: none;
-  }
-
   .footer .reg {
     color: #FB7C50;
   }
@@ -195,6 +170,30 @@ body {
     font-size: 10px;
   }
 
+.sign {
+  font-family: Roboto;
+  font-weight: 300;
+  background: #f05a27;
+  border: none;
+  border-radius: 15px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: .45em 1.25em;
+  font-size: 12px;
+  -webkit-transition: background .25s;
+  transition: background .25s;
+}
+
+.sign:hover {
+  background: #D03C0A;
+  text-decoration: none;
+}
+
+.sign:focus {
+  background: #D03C0A;
+  outline: none;
+  text-decoration: none;
+}
 
 #content {
   flex: 1 1 auto;
