@@ -11,9 +11,7 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'RIT Email', 'required':'', 'pattern':'[\w.%+-]+@(rit|g\.rit|)\.edu'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'First Name', 'required':'', 'maxlength':"50"}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Last Name', 'required':'', 'maxlength':"50"}))
-    choices = models.YEAR_LEVELS
-    choices.insert(0, ('','Year Level'))
-    year_level = forms.ChoiceField(choices=choices, widget=forms.Select(attrs={'class':'selectpicker show-menu-arrow form-control'}))
+    year_level = forms.ChoiceField(choices=models.YEAR_LEVELS + [('','Year Level')], widget=forms.Select(attrs={'class':'selectpicker show-menu-arrow form-control'}))
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)

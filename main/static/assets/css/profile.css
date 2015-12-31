@@ -6,6 +6,10 @@
   transition: opacity .25s;
 }
 
+body.touch .edit{
+  opacity: 1;
+}
+
 .edit.active {
   opacity: 1;
 }
