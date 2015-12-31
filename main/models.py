@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from calendar import monthrange
-from datetime import datetime, timedelta
+from datetime import date, timedelta
+from phonenumber_field.modelfields import PhoneNumberField
 
 class MemberManager(models.Manager):
     def create_member(self, user):
@@ -29,11 +31,15 @@ class TeamMember(models.Model):
     year_level = models.CharField(max_length = 1, choices=YEAR_LEVELS, default="1")
     sailing_level = models.CharField(max_length = 1, choices=SAILING_LEVELS, default="1")
     eboard_pos = models.CharField(max_length = 50, blank=True)
+    phone_number = PhoneNumberField(blank=True)
     dues_paid = models.DateField(blank=True, null=True)
     avatar = models.URLField(blank=True)
     objects = MemberManager()
     def is_dues_paid(self):
-        return self.dues_paid and monthdelta(datetime.date.today(), self.dues_paid) < 6
+        if self.dues_paid and monthdelta(date.today(), self.dues_paid) < 6:
+            return "Yes"
+        else:
+            return "No :'("
     def __str__(self):
         return str(self.user.first_name) + " " + str(self.user.last_name)
 

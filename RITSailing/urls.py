@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^events/$', views.page, {"template":"main/events.html"}),
     url(r'^files/$', views.page, {"template":"main/files.html"}),
     url(r'^members/$', views.page, {"template":"main/members.html"}),
+    url(r'^members/(?P<username>[a-zA-Z ].*)/$', views.profile, name="member"),
     url(r'^register/success/$', views.page, {"template":"main/success.html"}),
     url(r'^register/$', views.register, name="register"),
     url(r'^logout/$', logout),

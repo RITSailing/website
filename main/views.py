@@ -1,12 +1,10 @@
-from django.shortcuts import render
 from social.exceptions import AuthForbidden
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from social.pipeline.user import USER_FIELDS
-from social.exceptions import AuthForbidden
 from models import TeamMember, Request
 from responseutils import HttpRedirectException
 from forms import RegisterForm
@@ -25,7 +23,7 @@ def auth_allowed(backend, details, response, *args, **kwargs):
 			raise AuthForbidden(backend)
 
 # DO NOT TOUCH
-# This is a method overide for the associate_user step in the social authentication pipline
+# This is a method overide for the create_user step in the social authentication pipline
 # It is overrided so that we can create a new TeamMember object to go with the created user
 def create_user(strategy, details, user=None, *args, **kwargs):
 	if user:
@@ -67,6 +65,14 @@ def page(request, template):
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
 	return render(request, template, {'member':member})
+
+def profile(request, username):
+	user = get_object_or_404(User, username=username)
+	view_member = get_object_or_404(TeamMember, user=user)
+	member = None
+	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
+		member = TeamMember.objects.get(user=request.user)
+	return render(request, "main/profile.html", {'member':member, 'view_member': view_member})
 
 def register(request):
 	data = request.GET
