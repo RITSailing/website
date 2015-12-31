@@ -121,41 +121,27 @@ body {
   height: 5em;
 }
 
-  .footer .avatar {
-    position: relative;
-    color: #fff;
-  }
-
-  .footer .avatar .heading span{
-    color: #f8f8f8;
-  }
-
-  .footer .sign {
-    font-family: Roboto;
-    font-weight: 300;
-    background: #f05a27;
-    border: none;
-    border-radius: 15px;
-    text-transform: uppercase;
-    color: #fff;
-    padding: .45em 1.25em;
-    font-size: 12px;
-    -webkit-transition: background .25s;
-    transition: background .25s;
-  }
-
-  .footer .sign:hover {
-    background: #D03C0A;
-    text-decoration: none;
-  }
-
   .footer .reg {
     color: #FB7C50;
   }
 
 .avatar {
   display: -webkit-box;
+  -webkit-transition: color .25s;
+  transition: color .25s;
+  position: relative;
+  color: #fff;
 }
+
+  .avatar:hover {
+    text-decoration: none;
+    color: #E0E0E0;
+  }
+
+  .avatar:focus {
+    color: #c8c8c8;
+    outline: none;
+  }
 
   .avatar img{
     border-radius: 50%;
@@ -174,21 +160,50 @@ body {
     flex-direction: column;
     justify-content: center;
     padding-left: .5em;
+    text-decoration: none;
   }
 
   .avatar .heading span{
+    text-decoration: none;
     text-transform: uppercase;
-    color: #5A5A5A;
     font-style: italic;
     font-size: 10px;
   }
 
+.sign {
+  font-family: Roboto;
+  font-weight: 300;
+  background: #f05a27;
+  border: none;
+  border-radius: 15px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: .45em 1.25em;
+  font-size: 12px;
+  -webkit-transition: background .25s;
+  transition: background .25s;
+}
+
+.sign:hover {
+  background: #D03C0A;
+  text-decoration: none;
+}
+
+.sign:focus {
+  background: #D03C0A;
+  outline: none;
+  text-decoration: none;
+}
 
 #content {
   flex: 1 1 auto;
   background: #fff;
   overflow-y: auto;
   position: relative;
+}
+
+#main {
+  padding: 1em;
 }
 
 .navbar {
@@ -212,17 +227,6 @@ body {
   font-size: 14px;
   line-height: 1.42;
   border-radius: 50%;
-}
-
-#drag-node {
-  width: 2em;
-  position: fixed;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: #ccc;
-  z-index: 100000000;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,15 +1,15 @@
-from django.shortcuts import render
 from social.exceptions import AuthForbidden
-from django.shortcuts import render
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from social.pipeline.user import USER_FIELDS
-from social.exceptions import AuthForbidden
 from models import TeamMember, Request
 from responseutils import HttpRedirectException
-from forms import RegisterForm
+from forms import RegisterForm, ProfileForm
 # DO NOT TOUCH
 # This is a method overide for the auth_allowed step in the social authentication pipline
 # It is overrided so that we  can filter who can log in by the people that we have listed
@@ -25,7 +25,7 @@ def auth_allowed(backend, details, response, *args, **kwargs):
 			raise AuthForbidden(backend)
 
 # DO NOT TOUCH
-# This is a method overide for the associate_user step in the social authentication pipline
+# This is a method overide for the create_user step in the social authentication pipline
 # It is overrided so that we can create a new TeamMember object to go with the created user
 def create_user(strategy, details, user=None, *args, **kwargs):
 	if user:
@@ -42,13 +42,16 @@ def create_user(strategy, details, user=None, *args, **kwargs):
 	user = strategy.create_user(**fields)
 	member = TeamMember.objects.get_or_create(user=user)
 	fill_member_info(kwargs['response']['image'], member[0], details.get('email'))
-
 	return {
 		'is_new': True,
 		'user': user
 	}
 
 def fill_member_info(image, member, email):
+	ct = ContentType.objects.get_for_model(TeamMember)
+	member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_teammember'))
+	ct = ContentType.objects.get_for_model(Request)
+	member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_request'))
 	member.avatar = image['url'].split('?')[0]
 	# Delete the Request of the user that is being moved to member
 	if Request.objects.filter(email=email).first():
@@ -56,6 +59,7 @@ def fill_member_info(image, member, email):
 		member.year_level = request.year_level
 		request.delete()
 	member.save()
+	member.user.save()
 	send_conformation_email(email)
 
 def send_conformation_email(email):
@@ -67,6 +71,33 @@ def page(request, template):
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
 	return render(request, template, {'member':member})
+
+def profile(request, username):
+	user = get_object_or_404(User, username=username)
+	view_member = get_object_or_404(TeamMember, user=user)
+	member = None
+	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
+		member = TeamMember.objects.get(user=request.user)
+	return render(request, "main/profile.html", {'user':user,'member':member, 'view_member': view_member})
+
+def edit_profile(request, username):
+	user = get_object_or_404(User, username=username)
+	view_member = get_object_or_404(TeamMember, user=user)
+	if user is not request.user and not user.is_staff:
+		raise HttpResponseForbidden()
+	member = None
+	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
+		member = TeamMember.objects.get(user=request.user)
+
+	data = request.GET
+	if request.method == 'POST':
+		form = ProfileForm(request.POST, member=member, is_staff=request.user.is_staff)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('member', args=(username,)))
+	else:
+		form = ProfileForm(member=member, is_staff=request.user.is_staff)
+	return render(request, "main/profile.html", {'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
 
 def register(request):
 	data = request.GET

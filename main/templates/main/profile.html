@@ -1,0 +1,114 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% block title %}<title>RIT Sailing | Members</title>{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">{% endblock %}
+{% block content %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/members">Members</a>
+    <div class="navbar-left">
+      <ol class="breadcrumb">
+        <li><a href="/members">members</a></li>
+        <li class="active">{{view_member.user.username}}</li>
+      </ol>
+    </div>
+  </div>
+</nav>
+<div id="main">
+  {% for field in form %}
+      {% for error in field.errors %}
+          <div class="alert alert-danger">
+              <strong>{{ field.label_tag }}</strong> {{ error }}
+          </div>
+      {% endfor %}
+  {% endfor %}
+  {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+          {{ error }}
+      </div>
+  {% endfor %}
+  {% if is_edit %}
+  <form class="header" action="" method="post">{% csrf_token %}
+  {% else %}
+  <div class="header">
+  {% endif %}
+      {% if is_edit %}
+      <button type="submit"  class="edit active btn btn-default btn-circle"><i class="fa fa-pencil"></i></button>
+      {% else %}
+      <a href="edit/" class="edit btn btn-default btn-circle"><i class="fa fa-pencil"></i></a>
+      {% endif %}
+      <img src="{{view_member.avatar}}" class="alt avatar">
+      <div class="text">
+        <div class="name">
+          <h2>{{view_member.user.first_name}} {{view_member.user.last_name}}</h2>
+          <div class="badges">
+            {% if view_member.user.is_superuser %}
+            <i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="Admin"></i>
+            {% endif %}
+            {% if view_member.user.is_staff %}
+            <i class="fa fa-users" data-toggle="tooltip" data-placement="bottom" title="Board Member"></i>
+            {% endif %}
+          </div>
+        </div>
+        {% if is_edit and view_member.user.is_staff %}
+        <div class="input-group">
+          <span class="input-group-addon" id="addon"><i class="fa fa-users"></i></span>
+          {{ form.eboard_pos }}
+        </div>
+        {% else %}
+        <p class="sub-heading">{{view_member.eboard_pos}}</p>
+        {% endif %}
+        <div class="contact">
+          <a href="mailto:{{view_member.user.email}}" class="method"><i class="fa fa-envelope-o"></i> <p>{{view_member.user.email}}</p></a>
+          {% if is_edit %}
+          <div class="input-group">
+            <span class="input-group-addon" id="addon"><i class="fa fa-phone"></i></span>
+            {{ form.phone_number }}
+          </div>
+          {% endif %}
+          {% if view_member.phone_number and not is_edit%}
+            <a href="tel:{{view_member.phone_number}}" class="method"><i class="fa fa-phone"></i> <p>{{view_member.phone_number}}</p></a>
+          {% endif %}
+        </div>
+        <div class="details">
+          <div class="item">
+            {% if is_edit %}
+            {{ form.year_level }}
+            {% else %}
+            <h6>Year Level</h6>
+            <p>{{view_member.get_year_level_display}}</p>
+            {% endif %}
+          </div>
+          <div class="item">
+            {% if is_edit and request.user.is_staff %}
+            {{ form.sailing_level }}
+            {% else %}
+            <h6>Sailing Level</h6>
+            <p>{{view_member.get_sailing_level_display}}</p>
+            {% endif %}
+          </div>
+          {% if request.user = view_member.user or request.user.is_staff %}
+          <div class="item">
+            <h6>Dues Paid</h6>
+            <p>{{view_member.is_dues_paid}}</p>
+          </div>
+          {% endif %}
+        </div>
+      {% if is_edit %}
+      </form>
+      {% else %}
+      </div>
+      {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+  $(document).ready( function() {
+    if (Modernizr.touch){
+       $('body').addClass('touch');
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+{% endblock %}
