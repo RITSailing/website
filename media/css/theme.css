@@ -1,0 +1,56 @@
+.logo {
+  height: 55px;
+  margin-top: -8px;
+  margin-right: 10px;
+}
+
+#user-tools a:focus, #user-tools a:hover {
+    border-bottom-color: #F1F1F1;
+    color: #F1F1F1;
+}
+
+#header {
+    background: #FF5902;
+    color: #fff;
+}
+.module h2, .module caption, .inline-group h2 {
+  background: #F3854C;
+}
+
+div.breadcrumbs {
+    background: #999999;
+    color: #fff;
+}
+
+div.breadcrumbs a {
+  color: #E6E6E6;
+}
+
+div.breadcrumbs a:focus, div.breadcrumbs a:hover {
+    color: #F1F1F1;
+}
+
+.object-tools a:focus, .object-tools a:hover {
+    background-color: #F3854C;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #fff;
+}
+
+
+.button:active, input[type=submit]:active, input[type=button]:active, .button:focus, input[type=submit]:focus, input[type=button]:focus, .button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: #FD691D;
+}
+
+.button.default:active, input[type=submit].default:active, .button.default:focus, input[type=submit].default:focus, .button.default:hover, input[type=submit].default:hover {
+    background: #C74500;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #FF5902;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #F3854C;
+}
