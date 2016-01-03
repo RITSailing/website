@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from responseutils import HttpRedirectException
+from .responseutils import HttpRedirectException
 from django.core.urlresolvers import reverse
 import urllib
 
