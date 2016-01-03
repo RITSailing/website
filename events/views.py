@@ -1,6 +1,6 @@
 from django.shortcuts import render,  get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
-from models import Event
+from .models import Event
 from main.models import TeamMember
 
 def events(request, template):

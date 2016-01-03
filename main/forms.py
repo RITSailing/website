@@ -4,8 +4,8 @@ from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 from django import forms
-from models import Request
-import models
+from .models import Request
+from . import models
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'RIT Email', 'required':'', 'pattern':'[\w.%+-]+@(rit|g\.rit|)\.edu'}))

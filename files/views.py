@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from models import Folder, File
+from .models import Folder, File
 from main.models import TeamMember
 
 def files(request, template):

@@ -8,9 +8,9 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from social.pipeline.user import USER_FIELDS
-from models import TeamMember, Request
-from responseutils import HttpRedirectException
-from forms import RegisterForm, ProfileForm
+from .models import TeamMember, Request
+from .responseutils import HttpRedirectException
+from .forms import RegisterForm, ProfileForm
 from events.models import Event
 from files.models import File, Folder
 # DO NOT TOUCH

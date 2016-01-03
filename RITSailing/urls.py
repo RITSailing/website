@@ -29,7 +29,6 @@ urlpatterns = [
     url('', include(urls)),
     url('', include(f_urls)),
 	url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^inplaceeditform/', include('inplaceeditform.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
