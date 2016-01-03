@@ -19,14 +19,22 @@ class RegisterForm(forms.Form):
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()
         email = cleaned_data['email']
+        if email and 'rit.edu' in email:
+            if email.split('@', 1)[1] != 'g.rit.edu':
+                cleaned_data['email'] = email.split('@', 1)[0] + '@g.rit.edu'
+                email = cleaned_data['email']
+        else:
+            self._errors["email"] = ["Please enter a valid RIT email."]
+
         if Request.objects.filter(email=email):
             self._errors["email"] = ["That email has already requested to join."] # Will raise a error message
             del email
         elif User.objects.filter(email=email):
             self._errors["email"] = ["That email is already being used."] # Will raise a error message
             del email
-        elif email and email.split('@', 1)[1] != 'g.rit.edu':
-            cleaned_data['email'] = email.split('@', 1)[0] + '@g.rit.edu'
+        else:
+            self._errors["email"] = ["There was an error."]
+
         return cleaned_data
 
     def save(self, *args, **kwargs):

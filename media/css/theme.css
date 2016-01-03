@@ -12,22 +12,28 @@
 #header {
     background: #FF5902;
     color: #fff;
+    -webkit-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.3);
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
 }
 .module h2, .module caption, .inline-group h2 {
-  background: #F3854C;
+  background: #447E9B;
 }
 
 div.breadcrumbs {
-    background: #999999;
-    color: #fff;
+    background-color: #f8f8f8;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    color: #777777;
 }
 
 div.breadcrumbs a {
-  color: #E6E6E6;
+  color: #e64610;
 }
 
 div.breadcrumbs a:focus, div.breadcrumbs a:hover {
-    color: #F1F1F1;
+    color: #9e300b;
 }
 
 .object-tools a:focus, .object-tools a:hover {

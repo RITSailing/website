@@ -45,6 +45,28 @@ body {
   height: 100%;
 }
 
+.navbar-left {
+  float: left;
+}
+
+.navbar-right {
+  width: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: table;
+  float: right !important;
+  margin-right: -15px;
+}
+
+.input-group {
+  width: auto;
+  vertical-align: middle;
+}
+
+.navbar-form .input-group > .form-control {
+  width:auto;
+}
+
 .logo {
   position: relative;
   display: block;

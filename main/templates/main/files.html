@@ -2,14 +2,17 @@
 {% load staticfiles %}
 
 {% block title %}<title>RIT Sailing | Files</title>{% endblock %}
-{% block css %}<link rel="stylesheet" href="assets/css/files.css">{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'assets/css/files.css' %}">{% endblock %}
 {% block content %}
 <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Files</a>
     <div class="navbar-left">
       <ol class="breadcrumb">
-        <li class="active">root</li>
+        <li {% if path == None %}class="active">root {% else %}><a href="/files">root</a>{% endif %}</li>
+        {% for item in path %}
+        <li {% if forloop.last %}class="active">{{item.name}}{% else %}><a href="{{item.url}}">{{item.name}}</a>{% endif %}</li>
+        {% endfor %}
       </ol>
     </div>
     <form class="navbar-form navbar-right" role="search">
@@ -25,40 +28,30 @@
 <div id="main">
   <div class="files container-fluid">
     <div class="row">
-
-      <div class="col-md-2">
-        <div class="file panel panel-default">
+      {% for folder in folders %}
+      <div tabindex="0" href="{{folder.name|lower}}" class="file col-md-2">
+        <div class="panel panel-default">
           <div class="panel-body">
             <i class="fa fa-5x fa-folder"></i>
           </div>
           <div class="description panel-footer">
-            Folder Name
+            {{folder.name}}
           </div>
         </div>
       </div>
-
-      <div class="col-md-2">
-        <div class="file panel panel-default">
-          <div class="panel-body">
-            <i class="fa fa-5x fa-folder"></i>
-          </div>
-          <div class="description panel-footer">
-            Folder Name
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-2">
-        <div class="file panel panel-default">
+      {% endfor %}
+      {% for file in files %}
+      <div tabindex="0" href="{{file.content.url}}" class="file col-md-2">
+        <div class="panel panel-default">
           <div class="panel-body">
             <i class="fa fa-5x fa-file-word-o"></i>
           </div>
           <div class="description panel-footer">
-            File Name
-            <span>File Description</span>
+            {{file.name}}
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -66,5 +59,15 @@
 {% block js %}
 <script>
   $('[data-toggle="tooltip"]').tooltip();
+  $('.file').dblclick(function(){
+    window.location = $(this).attr('href');
+  });
+  $('.file').click(function() {
+    {% if request.user.is_staff %}
+      $(this).focus();
+    {% else %}
+      window.location = $(this).attr('href');
+    {% endif %}
+  });
 </script>
 {% endblock %}
