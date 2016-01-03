@@ -40,6 +40,8 @@ class TeamMember(models.Model):
             return "Yes"
         else:
             return "No :'("
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
     def __str__(self):
         return str(self.user.first_name) + " " + str(self.user.last_name)
 

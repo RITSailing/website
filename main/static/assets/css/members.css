@@ -1,0 +1,49 @@
+.badge {
+  margin-left: 0;
+}
+
+.members td {
+  vertical-align: middle!important;
+}
+
+.members td p {
+  display: -webkit-inline-box;
+  background: #EAEAEA;
+  padding: 0.1em 0.5em;
+  margin: 0;
+  color: #797979;
+}
+
+.table-hover > tbody > tr:hover .avatar-wrapper {
+  color: #e64610;
+}
+
+.table-hover > tbody > tr:hover {
+  cursor: pointer;
+}
+
+.detail {
+  padding: 8px 0!important;
+}
+
+.detail .item {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 0 .75em;
+}
+
+.detail .item h6 {
+  margin: 0;
+}
+
+.detail .item p {
+  background: #EAEAEA;
+  margin: 0 0 0 .75em;
+  padding: 0.1em 0.5em;
+  color: #797979;
+}
+
+.member > .detail ~ .detail .item {
+  border-left: solid 1px #ccc;
+}

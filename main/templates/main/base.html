@@ -24,7 +24,7 @@
       </div>
       <div class="footer" id="signin">
         {% if request.user.is_authenticated %}
-        <a href="{% url 'member' request.user.username %}" class="avatar">
+        <a href="{% url 'member' request.user.username %}" class="avatar-wrapper">
           <img src="{{member.avatar}}"/>
           <div class="heading">
             {{request.user.first_name}} {{request.user.last_name}}
@@ -43,6 +43,7 @@
     </section>
 
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'assets/js/bootstrap/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -69,6 +70,7 @@
         else
           $('.slideout-panel').css("margin-left", "");
       });
+      $('[data-toggle="tooltip"]').tooltip();
     </script>
   </body>
 </html>

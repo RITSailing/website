@@ -22,63 +22,39 @@
   </div>
 </nav>
 <div id="main" class="event-list list-group">
-
+  {% for event in events %}
   <div class="panel panel-default">
     <div class="event panel-body">
       <div class="date">
         <i class="fa fa-calendar-o"></i>
         <div class="text">
-          Dec
-          <span>5</span>
+          {{event.get_month}}
+          <span>{{event.get_day}}</span>
         </div>
       </div>
       <div class="description">
-        <h1>Boating Bash</h1>
-        <p>The boatiest bash</p>
+        <h1>{{event.title}}</h1>
+        <p>{{event.description}}</p>
       </div>
       <div class="going">
         <h4><b>Who's going?</b></h4>
         <div class="people">
-          <img class="avatar" src="{% static 'assets/images/avatar.jpg' %}" data-toggle="tooltip" data-placement="bottom" title="Gareth Daunton"/>
+          {% for person in event.going.all %}
+          <img class="avatar" src="{{person.avatar}}" data-toggle="tooltip" data-placement="bottom" title="{{person.full_name}}"/>
+          {% endfor %}
         </div>
       </div>
     </div>
+    {% if not event.closed_rsvp and request.user.is_authenticated %}
     <div class="panel-footer">
-        <a href="#" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-user"></i></a>
+        {% if member in event.going.all %}
+        <a href="{% url 'rm_rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="Remove RSVP"><i class="fa fa-calendar-times-o"></i></a>
+        {% else %}
+        <a href="{% url 'rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-calendar-plus-o"></i></a>
+        {% endif %}
     </div>
+    {% endif %}
   </div>
-
-  <div class="panel panel-default">
-    <div class="event panel-body">
-      <div class="date">
-        <i class="fa fa-calendar-o"></i>
-        <div class="text">
-          Dec
-          <span>5</span>
-        </div>
-      </div>
-      <div class="description">
-        <h1>Boating Bash V2</h1>
-        <p>The bashining</p>
-      </div>
-      <div class="going">
-        <h4><b>Who's going?</b></h4>
-        <div class="people">
-          <img class="avatar" src="{% static 'assets/images/avatar.jpg' %}" data-toggle="tooltip" data-placement="bottom" title="Gareth Daunton"/>
-          <img class="avatar" src="{% static 'assets/images/avatar.jpg' %}" data-toggle="tooltip" data-placement="bottom" title="Gareth Daunton"/>
-          <img class="avatar" src="{% static 'assets/images/avatar.jpg' %}" data-toggle="tooltip" data-placement="bottom" title="Gareth Daunton"/>
-          <img class="avatar" src="{% static 'assets/images/avatar.jpg' %}" data-toggle="tooltip" data-placement="bottom" title="Gareth Daunton"/>
-        </div>
-      </div>
-    </div>
-    <div class="panel-footer">
-        <a href="#" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-user"></i></a>
-    </div>
-  </div>
+  {% endfor %}
 </div>
-{% endblock %}
-{% block js %}
-<script>
-  $('[data-toggle="tooltip"]').tooltip();
-</script>
 {% endblock %}

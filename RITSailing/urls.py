@@ -16,22 +16,18 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.contrib.auth.views import logout
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
-from main import views
+from main import views, urls
+from events import urls as e_urls
+from files import urls as f_urls
 
 urlpatterns = [
     url(r'^$', views.page, {"template":"main/base.html"}),
-    url(r'^events/$', views.page, {"template":"main/events.html"}),
-    url(r'^files/$', views.page, {"template":"main/files.html"}),
-    url(r'^members/$', views.page, {"template":"main/members.html"}),
-    url(r'^members/(?P<username>[a-zA-Z ].*)/edit/$', views.edit_profile, name="edit"),
-    url(r'^members/(?P<username>[a-zA-Z ].*)/$', views.profile, name="member"),
-    url(r'^register/success/$', views.page, {"template":"main/success.html"}),
-    url(r'^register/$', views.register, name="register"),
-    url(r'^logout/$', logout),
+    url('', include(e_urls)),
+    url('', include(urls)),
+    url('', include(f_urls)),
 	url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^inplaceeditform/', include('inplaceeditform.urls')),
     url(r'^admin/', admin.site.urls),

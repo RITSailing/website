@@ -52,16 +52,6 @@ body.touch .edit{
     align-items: center;
   }
 
-  .name .badges {
-    margin-left: 1em;
-  }
-
-    .name .badges i {
-      font-size: 20px;
-      color: #F05A27;
-      margin-left: .5em;
-    }
-
   .sub-heading {
     font-style: italic;
     text-transform: uppercase;

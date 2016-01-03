@@ -34,7 +34,7 @@
   {% endif %}
       {% if is_edit %}
       <button type="submit"  class="edit active btn btn-default btn-circle"><i class="fa fa-pencil"></i></button>
-      {% else %}
+      {% elif request.user == user or request.user.is_staff %}
       <a href="edit/" class="edit btn btn-default btn-circle"><i class="fa fa-pencil"></i></a>
       {% endif %}
       <img src="{{view_member.avatar}}" class="alt avatar">
@@ -87,7 +87,7 @@
             <p>{{view_member.get_sailing_level_display}}</p>
             {% endif %}
           </div>
-          {% if request.user = view_member.user or request.user.is_staff %}
+          {% if request.user == view_member.user or request.user.is_staff %}
           <div class="item">
             <h6>Dues Paid</h6>
             <p>{{view_member.is_dues_paid}}</p>
@@ -108,7 +108,6 @@
     if (Modernizr.touch){
        $('body').addClass('touch');
     }
-    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
 {% endblock %}
