@@ -32,8 +32,6 @@ class RegisterForm(forms.Form):
         elif User.objects.filter(email=email):
             self._errors["email"] = ["That email is already being used."] # Will raise a error message
             del email
-        else:
-            self._errors["email"] = ["There was an error."]
 
         return cleaned_data
 

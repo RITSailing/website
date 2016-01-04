@@ -8,8 +8,9 @@ class Folder(models.Model):
     parent = models.OneToOneField('self', default=None, null=True, blank=True)
     def __str__(self):
         return self.name
-    def validate_unique(self):
-        for item in self.objects.filter(parent=self.parent):
+    def validate_unique(self, *args, **kwargs):
+        super(Folder, self).validate_unique(*args, **kwargs)
+        for item in self.__class__.objects.filter(parent=self.parent):
             if item.pk != self.pk and item.name == self.name:
                 raise ValidationError()
 
