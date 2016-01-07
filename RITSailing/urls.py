@@ -22,12 +22,14 @@ from django.conf import settings
 from main import views, urls
 from events import urls as e_urls
 from files import urls as f_urls
+from blog import urls as b_urls
 
 urlpatterns = [
-    url(r'^$', views.page, {"template":"main/base.html"}),
+    # url(r'^$', views.page, {"template":"main/base.html"}),
     url('', include(e_urls)),
     url('', include(urls)),
     url('', include(f_urls)),
+    url('', include(b_urls)),
 	url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

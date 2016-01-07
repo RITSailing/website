@@ -17,27 +17,24 @@ body {
   overflow-y: hidden;
 }
 
+.version {
+  text-transform: uppercase;
+  color: #fff;
+  opacity: .6;
+  position: absolute;
+  top: .5em;
+  left: .5em;
+}
+
 #sidebar {
   flex: 0 1 auto;
   width: 30em;
   height: 100%;
-  background: url('images/boat.jpg');
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('images/boat.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
-}
-
-#sidebar:before{
-  position: absolute;
-  content:" ";
-  top:0;
-  left:0;
-  width:30em;
-  height:100%;
-  display: block;
-  z-index:0;
-  background-color: rgba(0,0,0,0.3);
 }
 
 .sidebar-wrapper {
@@ -278,6 +275,7 @@ img.avatar.small {
     font-size: 20px;
     color: #F05A27;
     margin-left: .5em;
+    height: 20px;
   }
 
 @media screen and (max-width: 1000px) {

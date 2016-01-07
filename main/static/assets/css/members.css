@@ -2,11 +2,7 @@
   margin-left: 0;
 }
 
-.members td {
-  vertical-align: middle!important;
-}
-
-.members td p {
+.members .details p {
   display: -webkit-inline-box;
   background: #EAEAEA;
   padding: 0.1em 0.5em;
@@ -14,16 +10,52 @@
   color: #797979;
 }
 
-.table-hover > tbody > tr:hover .avatar-wrapper {
+.member {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: .5em 1em;
+  border-top: solid 1px #ddd;
+}
+
+.members .member:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.col.avatar-wrapper {
+  flex: 0 1 auto;
+}
+
+.details {
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1 1 auto;
+}
+
+.badges {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.member:hover {
+  opacity: .85;
+}
+.member:hover .avatar-wrapper {
   color: #e64610;
 }
 
-.table-hover > tbody > tr:hover {
+.member:hover {
   cursor: pointer;
 }
 
 .detail {
   padding: 8px 0!important;
+  flex: 1 1 auto;
 }
 
 .detail .item {
@@ -44,6 +76,11 @@
   color: #797979;
 }
 
-.member > .detail ~ .detail .item {
+.member .badges i {
+  text-align: center;
+  vertical-align:middle;
+}
+
+.details > .detail ~ .detail .item {
   border-left: solid 1px #ccc;
 }

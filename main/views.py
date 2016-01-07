@@ -13,6 +13,9 @@ from .responseutils import HttpRedirectException
 from .forms import RegisterForm, ProfileForm
 from events.models import Event
 from files.models import File, Folder
+from blog.models import Post
+from django.conf import settings
+
 # DO NOT TOUCH
 # This is a method overide for the auth_allowed step in the social authentication pipline
 # It is overrided so that we  can filter who can log in by the people that we have listed
@@ -69,6 +72,10 @@ def fill_member_info(new, image, member, email):
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='add_folder'))
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_folder'))
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='delete_folder'))
+		ct = ContentType.objects.get_for_model(Post)
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='add_post'))
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_post'))
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='delete_post'))
 	else:
 		member.user.user_permissions.clear()
 	# Set user avatar image
@@ -94,7 +101,8 @@ def page(request, template):
 	members = TeamMember.objects.all()
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, template, {'members':members, 'member':member})
+	version = settings.VERSION
+	return render(request, template, {'version':version, 'members':members, 'member':member})
 
 def profile(request, username):
 	user = get_object_or_404(User, username=username)
@@ -102,7 +110,8 @@ def profile(request, username):
 	member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, "main/profile.html", {'user':user,'member':member, 'view_member': view_member})
+	version = settings.VERSION
+	return render(request, "main/profile.html", {'version':version, 'user':user,'member':member, 'view_member': view_member})
 
 def edit_profile(request, username):
 	user = get_object_or_404(User, username=username)
@@ -121,7 +130,8 @@ def edit_profile(request, username):
 			return HttpResponseRedirect(reverse('member', args=(username,)))
 	else:
 		form = ProfileForm(member=member, is_staff=request.user.is_staff)
-	return render(request, "main/profile.html", {'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
+	version = settings.VERSION
+	return render(request, "main/profile.html", {'version':version, 'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
 
 def register(request):
 	data = request.GET

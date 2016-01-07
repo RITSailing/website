@@ -1,4 +1,4 @@
-.post header {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -8,7 +8,28 @@
   margin: 0 2em;
 }
 
-#date span {
+#date {
   color: #5A5A5A;
   margin-right: .5em;
+}
+
+.post {
+  position: relative;
+}
+
+.content {
+  padding: 1em 3em;
+  /*max-height: 10em;
+  overflow-y: hidden;*/
+}
+
+.post .sign {
+  position: absolute;
+  margin-top: 1em;
+  bottom: 0;
+  right: 1em;
+}
+
+.header .avatar-wrapper {
+  color: #333333;
 }
