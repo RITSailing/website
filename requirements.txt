@@ -1,5 +1,5 @@
 django
 python-social-auth
 django-phonenumber-field
-django-tinymce
+django-ckeditor
 django-el-pagination
