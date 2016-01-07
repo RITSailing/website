@@ -1,11 +1,12 @@
 from social.exceptions import AuthForbidden
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
+from django.template import loader, Context
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from social.pipeline.user import USER_FIELDS
 from .models import TeamMember, Request
@@ -89,12 +90,16 @@ def fill_member_info(new, image, member, email):
 	member.save()
 	member.user.save()
 	# Send an email confirming the user creation
-	if new:
-		send_conformation_email(email)
+	# if new:
+	# 	send_conformation_email(email)
 
-def send_conformation_email(email):
-	# TODO send the person a conformation email telling them that they signed up
-	placeholder = None
+def send_conformation_email(name, email):
+	d = Context({ 'name': name })
+	text_content = loader.get_template('main/request_email.txt').render(d)
+	html_content = loader.get_template('main/request_email.html').render(d)
+	msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
+	msg.attach_alternative(html_content, "text/html")
+	msg.send()
 
 def page(request, template):
 	member = None
@@ -138,7 +143,8 @@ def register(request):
 	if request.method == 'POST':
 		form = RegisterForm(request.POST, initial=data)
 		if form.is_valid():
-			form.save()
+			membership_request = form.save()
+			send_conformation_email(membership_request.first_name, membership_request.email)
 			return HttpResponseRedirect('/register/success/')
 	else:
 		form = RegisterForm(initial=data)
