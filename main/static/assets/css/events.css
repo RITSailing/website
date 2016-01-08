@@ -5,6 +5,7 @@
 .event {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
   .event .date {
@@ -32,7 +33,7 @@
     }
 
   .event .description {
-    padding-left: 2em;
+    padding: 0 2em;
   }
 
   .event .actions {
@@ -40,7 +41,7 @@
   }
 
   .event .going {
-    margin-left: 4em;
+    margin: 1em 0;
     font-style: italic;
   }
 

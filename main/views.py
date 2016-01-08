@@ -1,11 +1,12 @@
 from social.exceptions import AuthForbidden
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
+from django.template import loader, Context
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from social.pipeline.user import USER_FIELDS
 from .models import TeamMember, Request
@@ -13,6 +14,9 @@ from .responseutils import HttpRedirectException
 from .forms import RegisterForm, ProfileForm
 from events.models import Event
 from files.models import File, Folder
+from blog.models import Post
+from django.conf import settings
+
 # DO NOT TOUCH
 # This is a method overide for the auth_allowed step in the social authentication pipline
 # It is overrided so that we  can filter who can log in by the people that we have listed
@@ -69,6 +73,10 @@ def fill_member_info(new, image, member, email):
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='add_folder'))
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_folder'))
 		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='delete_folder'))
+		ct = ContentType.objects.get_for_model(Post)
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='add_post'))
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='change_post'))
+		member.user.user_permissions.add(Permission.objects.get(content_type=ct, codename='delete_post'))
 	else:
 		member.user.user_permissions.clear()
 	# Set user avatar image
@@ -82,19 +90,24 @@ def fill_member_info(new, image, member, email):
 	member.save()
 	member.user.save()
 	# Send an email confirming the user creation
-	if new:
-		send_conformation_email(email)
+	# if new:
+	# 	send_conformation_email(email)
 
-def send_conformation_email(email):
-	# TODO send the person a conformation email telling them that they signed up
-	placeholder = None
+def send_conformation_email(name, email):
+	d = Context({ 'name': name, 'domain':settings.DOMAIN })
+	text_content = loader.get_template('main/request_email.txt').render(d)
+	html_content = loader.get_template('main/request_email.html').render(d)
+	msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
+	msg.attach_alternative(html_content, "text/html")
+	msg.send()
 
 def page(request, template):
 	member = None
 	members = TeamMember.objects.all()
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, template, {'members':members, 'member':member})
+	version = settings.VERSION
+	return render(request, template, {'version':version, 'members':members, 'member':member})
 
 def profile(request, username):
 	user = get_object_or_404(User, username=username)
@@ -102,7 +115,8 @@ def profile(request, username):
 	member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, "main/profile.html", {'user':user,'member':member, 'view_member': view_member})
+	version = settings.VERSION
+	return render(request, "main/profile.html", {'version':version, 'user':user,'member':member, 'view_member': view_member})
 
 def edit_profile(request, username):
 	user = get_object_or_404(User, username=username)
@@ -115,20 +129,22 @@ def edit_profile(request, username):
 
 	data = request.GET
 	if request.method == 'POST':
-		form = ProfileForm(request.POST, member=member, is_staff=request.user.is_staff)
+		form = ProfileForm(request.POST, member=view_member, is_staff=request.user.is_staff)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse('member', args=(username,)))
 	else:
-		form = ProfileForm(member=member, is_staff=request.user.is_staff)
-	return render(request, "main/profile.html", {'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
+		form = ProfileForm(member=view_member, is_staff=request.user.is_staff)
+	version = settings.VERSION
+	return render(request, "main/profile.html", {'version':version, 'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
 
 def register(request):
 	data = request.GET
 	if request.method == 'POST':
 		form = RegisterForm(request.POST, initial=data)
 		if form.is_valid():
-			form.save()
+			membership_request = form.save()
+			send_conformation_email(membership_request.first_name, membership_request.email)
 			return HttpResponseRedirect('/register/success/')
 	else:
 		form = RegisterForm(initial=data)

@@ -2,13 +2,15 @@ from django.shortcuts import render,  get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
 from .models import Event
 from main.models import TeamMember
+from django.conf import settings
 
 def events(request, template):
 	events = Event.objects.all()
 	member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	return render(request, template, {'events':events, 'member':member})
+	version = settings.VERSION
+	return render(request, template, {'version':version, 'events':events, 'member':member})
 
 def rsvp(request, pk):
     next = request.GET.get('next', None)

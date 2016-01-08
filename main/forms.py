@@ -43,7 +43,7 @@ class RegisterForm(forms.Form):
         return Request.objects.create_request(email, first_name, last_name, year_level)
 
 class ProfileForm(forms.Form):
-    eboard_pos = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Eboard Position', 'required':'', 'maxlength':"50", "aria-describedby":'addon'}))
+    eboard_pos = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Eboard Position', 'required':'', 'maxlength':"50", "aria-describedby":'addon'}))
     phone_number = PhoneNumberField(required=False, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Phone Number', "aria-describedby":'addon'}))
     sailing_level = forms.ChoiceField(choices=models.SAILING_LEVELS, widget=forms.Select(attrs={'class':'form-control'}))
     year_level = forms.ChoiceField(choices=models.YEAR_LEVELS, widget=forms.Select(attrs={'class':'form-control'}))

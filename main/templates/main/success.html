@@ -21,7 +21,7 @@
     <img class="logo" src="{% static 'assets/images/logo.png' %}">
     <h1 style="font-size: 35px;">Your request has been submitted!</h1>
     <h2>We have sent you an email about what to do next.</h2>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       function replay() {
         document.getElementsByTagName('video').currentTime = 0.1;
@@ -31,7 +31,7 @@
       function redirect(){
         window.location.href = "/register";
       }
-      setTimeout(redirect, 8000);
+      setTimeout(redirect, 6000);
     </script>
   </body>
 </html>

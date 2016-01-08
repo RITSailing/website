@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include page_template %}
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{{ STATIC_URL }}el-pagination/js/el-pagination.js"></script>
+    <script>
+        $.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollChunkSize: 5
+        });
+    </script>
+{% endblock %}

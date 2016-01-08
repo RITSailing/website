@@ -6,7 +6,7 @@
 {% block content %}
 <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Files</a>
+    <a class="navbar-brand" href="/files">Files</a>
     <div class="navbar-left">
       <ol class="breadcrumb">
         <li {% if path == None %}class="active">root {% else %}><a href="/files">root</a>{% endif %}</li>
@@ -15,14 +15,14 @@
         {% endfor %}
       </ol>
     </div>
-    <form class="navbar-form navbar-right" role="search">
+    <!-- <form class="navbar-form navbar-right" role="search">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
         </span>
       </div>
-    </form>
+    </form> -->
   </div>
 </nav>
 <div id="main">

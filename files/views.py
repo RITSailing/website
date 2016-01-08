@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Folder, File
 from main.models import TeamMember
+from django.conf import settings
 
 def files(request, template):
 	children_folders = Folder.objects.filter(parent=None)
@@ -8,8 +9,8 @@ def files(request, template):
 	Member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-
-	return render(request, template, {'files':children_files, 'folders':children_folders, 'member':member})
+	version = settings.VERSION
+	return render(request, template, {'version':version, 'files':children_files, 'folders':children_folders, 'member':member})
 
 def folder(request, path):
 	path_items = path.split('/')
@@ -29,5 +30,5 @@ def folder(request, path):
 	Member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-
-	return render(request, 'main/files.html', {'path':path_urls, 'files':children_files, 'folders':children_folders, 'member':member})
+	version = settings.VERSION
+	return render(request, 'main/files.html', {'version':version, 'path':path_urls, 'files':children_files, 'folders':children_folders, 'member':member})
