@@ -26,9 +26,9 @@ EMAIL_DEFAULT_FROM = 'donotreply@sail.rhosoft.co'
 SECRET_KEY = '1%_28b4n7!&v7&6t1uz5ysmt0(_h)0k3_7%k0b(uvo2)5wj4*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['sail.rhosoft.co']
 
 
 # Application definition

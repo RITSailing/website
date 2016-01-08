@@ -94,7 +94,7 @@ def fill_member_info(new, image, member, email):
 	# 	send_conformation_email(email)
 
 def send_conformation_email(name, email):
-	d = Context({ 'name': name })
+	d = Context({ 'name': name, 'domain':settings.DOMAIN })
 	text_content = loader.get_template('main/request_email.txt').render(d)
 	html_content = loader.get_template('main/request_email.html').render(d)
 	msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
@@ -129,12 +129,12 @@ def edit_profile(request, username):
 
 	data = request.GET
 	if request.method == 'POST':
-		form = ProfileForm(request.POST, member=member, is_staff=request.user.is_staff)
+		form = ProfileForm(request.POST, member=view_member, is_staff=request.user.is_staff)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse('member', args=(username,)))
 	else:
-		form = ProfileForm(member=member, is_staff=request.user.is_staff)
+		form = ProfileForm(member=view_member, is_staff=request.user.is_staff)
 	version = settings.VERSION
 	return render(request, "main/profile.html", {'version':version, 'form':form, 'is_edit': True, 'user':user, 'member':member, 'view_member': view_member})
 
