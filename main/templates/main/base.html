@@ -65,6 +65,10 @@
           $('.slideout-panel').css("margin-left", $('#sidebar').width());
         else
           $('.slideout-panel').css("margin-left", "");
+
+        $('.navbar-toggle').click( function() {
+          slideout.toggle();
+        });
       });
       $(window).resize(function() {
         if($(document).width() > 780)

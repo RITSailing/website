@@ -278,7 +278,7 @@ img.avatar.small {
     height: 20px;
   }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   #sidebar {
     max-width: 30em;
     min-width: 21em;
@@ -287,5 +287,11 @@ img.avatar.small {
 
   #main {
     padding: 1em 0;
+  }
+
+  .navbar-toggle {
+    float: left;
+    margin-right: 0;
+    border: none;
   }
 }
