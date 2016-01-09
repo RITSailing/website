@@ -1,6 +1,21 @@
 {% load staticfiles %}
 <html>
   <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+      a {
+        color: #e64610;
+        text-decoration: none;
+      }
+
+      a:hover, a:focus {
+        color: #9e300b;
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
     <img src="{{domain}}{% static 'assets/images/logo.png' %}" style="max-width: 200px; max-height: 200px;"/>

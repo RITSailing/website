@@ -51,9 +51,11 @@
           </div>
         </div>
         {% if is_edit and view_member.user.is_staff %}
-        <div class="input-group">
-          <span class="input-group-addon" id="addon"><i class="fa fa-users"></i></span>
-          {{ form.eboard_pos }}
+        <div class="input-wrapper">
+          <div class="input-group">
+            <span class="input-group-addon" id="addon"><i class="fa fa-users"></i></span>
+            {{ form.eboard_pos }}
+          </div>
         </div>
         {% else %}
         <p class="sub-heading">{{view_member.eboard_pos}}</p>
@@ -61,9 +63,11 @@
         <div class="contact">
           <a href="mailto:{{view_member.user.email}}" class="method"><i class="fa fa-envelope-o"></i> <p>{{view_member.user.email}}</p></a>
           {% if is_edit %}
-          <div class="input-group">
-            <span class="input-group-addon" id="addon"><i class="fa fa-phone"></i></span>
-            {{ form.phone_number }}
+          <div class="input-wrapper">
+            <div class="input-group">
+              <span class="input-group-addon" id="addon"><i class="fa fa-phone"></i></span>
+              {{ form.phone_number }}
+            </div>
           </div>
           {% endif %}
           {% if view_member.phone_number and not is_edit%}

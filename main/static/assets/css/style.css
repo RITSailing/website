@@ -274,14 +274,18 @@ img.avatar.small {
   .badges i{
     font-size: 20px;
     color: #F05A27;
-    margin-left: .5em;
+    margin: 0 .25em;
     height: 20px;
   }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
   #sidebar {
     max-width: 30em;
     min-width: 21em;
     width: 30%;
+  }
+
+  #main {
+    padding: 1em 0;
   }
 }

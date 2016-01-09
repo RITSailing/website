@@ -22,10 +22,10 @@
   </div>
 </nav>
 <div id="main">
-  <div class="container-fluid">
-    <div class="members table table-striped table-hover">
-        {% for m in members %}
-        <div class="member" href="{% url 'member' m.user.username %}">
+  <table class="members table table-striped table-hover">
+      {% for m in members %}
+      <tr class="member" href="{% url 'member' m.user.username %}">
+        <td class="name">
           <div class="col avatar-wrapper alt">
             <img src="{{m.avatar}}"/>
             <div class="heading">
@@ -41,32 +41,32 @@
             <i class="fa fa-users" data-toggle="tooltip" data-placement="bottom" title="Board Member"></i>
             {% endif %}
           </div>
-          <div class="details">
-            <div class="detail">
-              <div class="item">
-                <h6>Year Level</h6>
-                <p>{{m.get_year_level_display}}</p>
-              </div>
+        </td>
+        <td class="details">
+          <div class="detail">
+            <div class="item">
+              <h6>Year Level</h6>
+              <p>{{m.get_year_level_display}}</p>
             </div>
-            <div class="detail">
-              <div class="item">
-                <h6>Sailing Level</h6>
-                <p>{{m.get_sailing_level_display}}</p>
-              </div>
-            </div>
-            {% if request.user.is_staff %}
-            <div class="detail">
-              <div class="item">
-                <h6>Dues Paid</h6>
-                <p>{{m.is_dues_paid}}</p>
-              </div>
-            </div>
-            {% endif %}
           </div>
-        </div>
-        {% endfor %}
-    </table>
-  </div>
+          <div class="detail">
+            <div class="item">
+              <h6>Sailing Level</h6>
+              <p>{{m.get_sailing_level_display}}</p>
+            </div>
+          </div>
+          {% if request.user.is_staff %}
+          <div class="detail">
+            <div class="item">
+              <h6>Dues Paid</h6>
+              <p>{{m.is_dues_paid}}</p>
+            </div>
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+  </table>
 </div>
 {% endblock %}
 {% block js %}

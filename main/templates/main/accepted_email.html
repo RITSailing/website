@@ -1,6 +1,41 @@
 {% load staticfiles %}
 <html>
   <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+
+      .sign {
+          font-weight: 300;
+          background: #f05a27;
+          border: none;
+          border-radius: 15px;
+          text-transform: uppercase;
+          color: #fff;
+          padding: .45em 1.25em;
+          font-size: 12px;
+          text-decoration: none;
+        }
+
+        .sign:hover, .sign:focus {
+          outline: none;
+          color: #c8c8c8;
+          background: #D03C0A;
+          text-decoration: none;
+        }
+
+        a {
+          color: #e64610;
+          text-decoration: none;
+        }
+
+        a:hover, a:focus {
+          color: #9e300b;
+          text-decoration: underline;
+        }
+    </style>
   </head>
   <body>
     <img src="{{domain}}{% static 'assets/images/logo.png' %}" style="max-width: 200px; max-height: 200px;"/>
@@ -10,6 +45,7 @@
       To setup your account please login using your <b>RIT Google account</b> on our <a href="{{domain}}/">webpage</a>.<br />
       From there you can view documents, request equipment, RSVP to events, and much more.
     </p>
+    <a href="{{domain}}/login/google-oauth2" class="sign">Login</a>
     <p>
       We'll see you on the water!<br />
       <b>The RIT Sailing Club</b>
