@@ -18,12 +18,23 @@ body {
 }
 
 .version {
+  display: flex;
+  justify-content: center;
   text-transform: uppercase;
   color: #fff;
   opacity: .6;
   position: absolute;
   top: .5em;
   left: .5em;
+}
+
+.version i {
+  color: #fff;
+  font-size: 32px;
+}
+
+.version i:hover {
+    color: #f05a27;
 }
 
 #sidebar {
