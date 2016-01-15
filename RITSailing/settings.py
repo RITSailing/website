@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-VERSION = 'alpha 0.1'
+VERSION = 'alpha 0.2'
 DOMAIN = 'http://sail.rhosoft.co'
 EMAIL_DEFAULT_FROM = 'donotreply@sail.rhosoft.co'
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'flatpages',
     'events',
     'files',
     'blog',
@@ -61,6 +62,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'flatpages.middleware.FlatpageFallbackMiddleware',
     'main.middleware.HttpRedirect'
 ]
 

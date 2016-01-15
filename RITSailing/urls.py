@@ -23,6 +23,7 @@ from main import views, urls
 from events import urls as e_urls
 from files import urls as f_urls
 from blog import urls as b_urls
+from flatpages import views
 
 urlpatterns = [
     # url(r'^$', views.page, {"template":"main/base.html"}),
@@ -32,6 +33,7 @@ urlpatterns = [
     url('', include(b_urls)),
 	url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
+    url(r'^(?P<url>.*/)$', views.flatpage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'RIT Sailing Admin'

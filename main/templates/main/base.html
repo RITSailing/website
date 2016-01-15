@@ -23,6 +23,7 @@
       <img class="logo" src="{% static 'assets/images/logo.png' %}"/>
       <div class="nav">
         <div class="item"><a href="/">Home</a></div>
+        <div class="item"><a href="/blog">Blog</a></div>
         <div class="item"><a href="/members">Members</a></div>
         <div class="item"><a href="/events">Events</a></div>
         <div class="item"><a href="/files">Files</a></div>
@@ -63,7 +64,12 @@
           'tolerance': 70
         });
         var path = window.location.pathname.split('/')[1];
-        $('.nav .item a[href="/'+path+'"]').parents('.item').addClass('active');
+        if($('.nav .item a[href="/'+path+'"]').length){
+          $('.nav .item a[href="/'+path+'"]').parents('.item').addClass('active');
+        } else {
+          $('.nav .item a[href="/"]').parents('.item').addClass('active');
+        }
+
         if($(document).width() > 780)
           $('.slideout-panel').css("margin-left", $('#sidebar').width());
         else

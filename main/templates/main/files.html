@@ -15,7 +15,7 @@
     <a class="navbar-brand" href="/files">Files</a>
     <div class="navbar-left">
       <ol class="breadcrumb">
-        <li {% if path == None %}class="active">root {% else %}><a href="/files">root</a>{% endif %}</li>
+        <li {% if path == None %}class="active"><i class="fa fa-folder-open"></i> {% else %}><a href="/files"><i class="fa fa-folder-open"></i></a>{% endif %}</li>
         {% for item in path %}
         <li {% if forloop.last %}class="active">{{item.name}}{% else %}><a href="{{item.url}}">{{item.name}}</a>{% endif %}</li>
         {% endfor %}
@@ -35,7 +35,7 @@
   <div class="files container-fluid">
     <div class="row">
       {% for folder in folders %}
-      <div tabindex="0" href="{{folder.name|lower}}" class="file col-md-2">
+      <div tabindex="0" href="{{folder.name|lower}}" class="file col-md-2 col-sm-2 col-xs-2">
         <div class="panel panel-default">
           <div class="panel-body">
             <i class="fa fa-5x fa-folder"></i>
@@ -70,7 +70,11 @@
   });
   $('.file').click(function() {
     {% if request.user.is_staff %}
-      $(this).focus();
+      if(!Modernizr.touch){
+        $(this).focus();
+      } else {
+        window.location = $(this).attr('href');
+      }
     {% else %}
       window.location = $(this).attr('href');
     {% endif %}
