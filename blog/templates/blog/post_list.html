@@ -26,9 +26,18 @@
     {{ block.super }}
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
-        $.endlessPaginate({
-            paginateOnScroll: true,
-            paginateOnScrollChunkSize: 5
-        });
+      $('#content').endlessPaginate({
+        paginateOnScroll: true,
+        paginateOnScrollChunkSize: 1,
+        onCompleted: function(data) {
+          console.log('New entries loaded.');
+        },
+      });
+      var win = $('#content'),
+            doc = $('#main');
+      win.scroll( function(){
+        // console.log(doc.scrollTop());
+        console.log(doc.height() - win.scrollTop());
+      });
     </script>
 {% endblock %}

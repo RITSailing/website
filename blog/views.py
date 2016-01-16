@@ -5,17 +5,17 @@ from el_pagination.decorators import page_template
 from django.conf import settings
 
 @page_template('blog/post_page.html')
-def main(request, template='blog/post_page_index.html', extra_context=None):
+def main(request, template='blog/post_list.html', extra_context=None):
 	member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
-	posts = Post.objects.all()
+
 	version = settings.VERSION
 	context = {
 		'version':version,
 		'page_template':page_template,
-		'posts':posts,
-		'member':member
+		'posts':Post.objects.all().order_by('-date'),
+		'member':member,
 	}
 	if extra_context is not None:
 		context.update(extra_context)

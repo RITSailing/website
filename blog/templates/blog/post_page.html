@@ -1,21 +1,22 @@
 {% load el_pagination_tags %}
 
-{% if posts %}
-{% paginate posts %}
+{% lazy_paginate 1 posts %}
 {% for post in posts %}
 <div class="post">
     <div class="header">
-      <div class="title">
-        <h2>{{post.title}}</h2>
-        <span id="date"><i class="fa fa-calendar"></i> {{post.date}}</span>
-      </div>
-      <a href="{% url 'member' post.author.user.username %}" class="avatar-wrapper">
-        <img src="{{post.author.avatar}}"/>
+      <div class="avatar-wrapper">
+        <a href="{% url 'member' post.author.user.username %}">
+          <img src="{{post.author.avatar}}"/>
+        </a>
         <div class="heading">
-          {{post.author.user.first_name}} {{post.author.user.last_name}}
+          <div class="extra">
+            {{post.author.user.first_name}} {{post.author.user.last_name}}
+            <span id="date"><i class="fa fa-calendar"></i> {{post.date}}</span>
+          </div>
           <span>{{post.author.eboard_pos}}</span>
+          <h4 class="title">{{post.title}}</h4>
         </div>
-      </a>
+      </div>
     </div>
     <div class="content">
       {{post.content|safe}}
@@ -23,7 +24,4 @@
     <!-- <a href="{% url 'post' post.pk %}" class="sign">Read More</a> -->
 </div>
 {% endfor %}
-{% show_more %}
-{% else %}
-<h6>There are no more posts to display.</h6>
-{% endif %}
+{% show_more "Load More" %}

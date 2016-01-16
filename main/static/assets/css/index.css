@@ -1,11 +1,9 @@
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: solid #000 1px;
-  padding: 1em;
-  padding-top: 0;
+  /*border-bottom: solid #000 1px;*/
+  padding: 0 1em;
 }
 
 .header .title h2 {
@@ -13,18 +11,18 @@
 }
 
 #date {
-  color: #5A5A5A;
-  margin-right: .5em;
+  color: #333333;
+  margin-left: 1em;
 }
 
 .post {
   position: relative;
+  border-top: solid 1px #E7E7E7;
+  padding-top: 1em;
 }
 
 .content {
   padding: 1em 1.5em;
-  /*max-height: 10em;
-  overflow-y: hidden;*/
 }
 
 .post .sign {
@@ -34,6 +32,81 @@
   right: 1em;
 }
 
+.header span{
+  text-decoration: none;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 10px;
+}
+
+.title {
+  margin: 0;
+  margin-top: 5px;
+}
+
 .header .avatar-wrapper {
   color: #333333;
+  margin-right: 1em;
+  display: flex;
+}
+
+.header .avatar-wrapper .heading {
+  justify-content: flex-start;
+  display: inline-flex;
+}
+
+.header .avatar-wrapper .heading .extra {
+    display: flex;
+    align-items: center;
+}
+
+.endless_container {
+  text-align: center;
+}
+
+.endless_more {
+  content: 'load more';
+}
+
+.endless_loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.loading-bar {
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 4px;
+  animation: loading 1s ease-in-out infinite;
+}
+
+.loading-bar:nth-child(1) {
+  background-color: #f05a27;
+  animation-delay: 0;
+}
+.loading-bar:nth-child(2) {
+  background-color: #f05a27;
+  animation-delay: 0.09s;
+}
+.loading-bar:nth-child(3) {
+  background-color: #f05a27;
+  animation-delay: .18s;
+}
+.loading-bar:nth-child(4) {
+  background-color: #f05a27;
+  animation-delay: .27s;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.2);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
