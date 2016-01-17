@@ -17,7 +17,7 @@ class MemberManager(models.Manager):
 	def search(self, query):
 		array = []
 		for p in self.all():
-			if query in p.user.first_name.lower() or query in p.user.last_name.lower() or query in p.get_year_level_display().lower() or query in p.get_sailing_level_display().lower() or query in p.eboard_pos.lower():
+			if (query in "staff" or query in "eboard member" and p.user.is_staff) or (query in "admin" and p.user.is_superuser) or query in p.user.first_name.lower() or query in p.user.last_name.lower() or query in p.get_year_level_display().lower() or query in p.get_sailing_level_display().lower() or query in p.eboard_pos.lower():
 				array.append(p)
 		return array
 
