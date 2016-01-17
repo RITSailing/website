@@ -35,6 +35,12 @@
   <table class="members table table-striped table-hover">
     <tbody>
       {% include page_template %}
+      <div class="endless_loading loading" style="display: none;">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+      </div>
     </tbody>
   </table>
 </div>
@@ -43,9 +49,11 @@
 <script>
   $('.member').click( function() {
       window.location = $(this).attr('href');
-  })
+  });
+  var timeout;
   $(function() {
     $('#search').keyup(function() {
+      timeout = setTimeout(function() { $('.endless_loading').css('display', 'initial') }, 500);
       $.ajax({
         type: "GET",
         url: "/members/search/",
@@ -58,10 +66,14 @@
       });
     });
   });
-
   function searchSuccess(data, textStatus, jqXHR){
+      clearTimeout(timeout);
+      $('.endless_loading').css('display', 'none');
       $('.members.table').html(data);
       $('[data-toggle="tooltip"]').tooltip();
+      $('.member').click( function() {
+          window.location = $(this).attr('href');
+      });
   }
 </script>
 {% endblock %}
