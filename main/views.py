@@ -107,7 +107,17 @@ def page(request, template):
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
 	version = settings.VERSION
-	return render(request, template, {'version':version, 'members':members, 'member':member})
+	return render(request, template, {'version':version, 'members':members, 'member':member, 'page_template':'main/member.html'})
+
+def search_members(request):
+    if request.method == "GET":
+        search_text = str(request.GET['search_text']).lower()
+        if search_text is not None and search_text != u"":
+            search_text = request.GET['search_text']
+            members = TeamMember.objects.search(query = search_text)
+        else:
+            members = TeamMember.objects.all()
+        return render(request, 'main/member.html', {'members':members})
 
 def profile(request, username):
 	user = get_object_or_404(User, username=username)

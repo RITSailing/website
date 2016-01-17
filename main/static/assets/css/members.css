@@ -81,3 +81,23 @@ td {
 .details > .detail ~ .detail .item {
   border-left: solid 1px #ccc;
 }
+
+#search {
+  border-radius: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.search.input-group {
+  width: 100%;
+  padding: 0 .5em;
+  margin-bottom: 1em;
+}
+
+.search.input-group > i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  z-index: 2;
+}

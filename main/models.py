@@ -14,6 +14,12 @@ class MemberManager(models.Manager):
 			return self.get(user=user)
 		except Exception as e:
 			return self.create(user=user)
+	def search(self, query):
+		array = []
+		for p in self.all():
+			if query in p.user.first_name.lower() or query in p.user.last_name.lower() or query in p.get_year_level_display().lower() or query in p.get_sailing_level_display().lower() or query in p.eboard_pos.lower():
+				array.append(p)
+		return array
 
 YEAR_LEVELS = [
 		('1', '1st'),
