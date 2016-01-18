@@ -6,6 +6,7 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'assets/css/events.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/owl_carousel/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl_carousel/owl.theme.default.css' %}">
 {% endblock %}
 {% block content %}
 <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix">
@@ -68,10 +69,26 @@
 {% block js %}
   <script src="{% static 'assets/js/owl_carousel/owl.carousel.min.js' %}"></script>
   <script>
+  $(document).ready(function(){
     {% for event in events %}
     $(".owl-carousel.{{event.pk}}").owlCarousel({
-      items: {{event.going.all.count}},
+      'margin': 10,
+      responsive:{
+        480:{
+          items:4
+        },
+        678:{
+          items:5
+        },
+        960:{
+          items:6
+        },
+        1500: {
+          items:8
+        }
+      }
     });
     {% endfor %}
+  });
   </script>
 {% endblock %}
