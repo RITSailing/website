@@ -29,7 +29,7 @@ class Item(models.Model):
 		request = Request.objects.filter(item_type=self, accepted=True)
 		return (min(request.end_date, end_date) - max(request.start_date, start_date)).days + 1 < 0
 
-class Request(models.Model):
+class ItemRequest(models.Model):
 	accepted = models.BooleanField(default=False)
 	picked_up = models.BooleanField(default=False)
 	returned = models.BooleanField(default=False)

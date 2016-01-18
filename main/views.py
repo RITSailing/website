@@ -94,12 +94,13 @@ def fill_member_info(new, image, member, email):
 	# 	send_conformation_email(email)
 
 def send_conformation_email(name, email):
-	d = Context({ 'name': name, 'domain':settings.DOMAIN })
-	text_content = loader.get_template('main/request_email.txt').render(d)
-	html_content = loader.get_template('main/request_email.html').render(d)
-	msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
-	msg.attach_alternative(html_content, "text/html")
-	msg.send()
+	if not settings.DEBUG:
+		d = Context({ 'name': name, 'domain':settings.DOMAIN })
+		text_content = loader.get_template('main/request_email.txt').render(d)
+		html_content = loader.get_template('main/request_email.html').render(d)
+		msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
 
 def page(request, template):
 	member = None
