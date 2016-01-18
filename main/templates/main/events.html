@@ -3,7 +3,10 @@
 
 <!DOCTYPE html>
 {% block title %}<title>RIT Sailing | Events</title>{% endblock %}
-{% block css %}<link rel="stylesheet" href="{% static 'assets/css/events.css' %}">{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'assets/css/events.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl_carousel/owl.carousel.css' %}">
+{% endblock %}
 {% block content %}
 <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix">
   <div class="container-fluid">
@@ -41,7 +44,7 @@
       </div>
       <div class="going">
         <h4><b>Who's going?</b></h4>
-        <div class="people">
+        <div class="owl-carousel {{event.pk}}">
           {% for person in event.going.all %}
           <img class="avatar" src="{{person.avatar}}" data-toggle="tooltip" data-placement="bottom" title="{{person.full_name}}"/>
           {% endfor %}
@@ -60,4 +63,15 @@
   </div>
   {% endfor %}
 </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'assets/js/owl_carousel/owl.carousel.min.js' %}"></script>
+  <script>
+    {% for event in events %}
+    $(".owl-carousel.{{event.pk}}").owlCarousel({
+      items: {{event.going.all.count}},
+    });
+    {% endfor %}
+  </script>
 {% endblock %}
