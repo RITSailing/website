@@ -46,7 +46,7 @@
   }
 
     .event .going .people {
-      display: -webkit-inline-box;
+      display: flex;
     }
 
     .event .going .people img:not(:first-child) {
