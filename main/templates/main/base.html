@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta property="og:image" content="http://sail.rhosoft.co/static/assets/images/logo.png"/>
+    <meta property="og:image" content="{% static 'assets/images/logo.png' %}"/>
     {% block title %}<title>RIT Sailing</title>{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-touch-icon-57x57.png' %}">
@@ -46,7 +46,7 @@
         <div class="item"><a href="/blog">Blog</a></div>
         <div class="item"><a href="/members">Members</a></div>
         <div class="item"><a href="/events">Events</a></div>
-        <div class="item"><a href="/files">Files</a></div>
+        <div class="item"><a href="/files">More</a></div>
       </div>
       <div class="footer" id="signin">
         {% if request.user.is_authenticated %}

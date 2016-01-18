@@ -1,0 +1,9 @@
+Hello {{name}},
+
+Your request for the equipment {{equipment}} has been accepted!
+To retrieve the requested equipment please contact the Quartermaster.
+Once you are finished with the item please make sure that it returns to the location it was previously.
+Also please report any damage to the item to the Quartermaster immediately.
+
+Thank you!
+The RIT Sailing Club

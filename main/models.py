@@ -17,7 +17,7 @@ class MemberManager(models.Manager):
 	def search(self, query):
 		array = []
 		for p in self.all():
-			if (query in "staff" or query in "eboard member" and p.user.is_staff) or (query in "admin" and p.user.is_superuser) or query in p.user.username.lower() or query in p.user.first_name.lower() or query in p.user.last_name.lower() or query in p.get_year_level_display().lower() or query in p.get_sailing_level_display().lower() or query in p.eboard_pos.lower():
+			if (query in "staff" or query in "eboard member" and p.user.is_staff) or (query in "admin" and p.user.is_superuser) or query in p.user.username.lower() or query in (p.user.first_name.lower() + " " + p.user.last_name.lower()) or query in p.get_year_level_display().lower() or query in p.get_sailing_level_display().lower() or query in p.eboard_pos.lower():
 				array.append(p)
 		return array
 
@@ -37,9 +37,9 @@ SAILING_LEVELS = (
 )
 class TeamMember(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	year_level = models.CharField(max_length = 1, choices=YEAR_LEVELS, default="1")
-	sailing_level = models.CharField(max_length = 1, choices=SAILING_LEVELS, default="1")
-	eboard_pos = models.CharField(max_length = 50, blank=True)
+	year_level = models.CharField(max_length=1, choices=YEAR_LEVELS, default="1")
+	sailing_level = models.CharField(max_length=1, choices=SAILING_LEVELS, default="1")
+	eboard_pos = models.CharField(max_length=50, blank=True)
 	phone_number = PhoneNumberField(blank=True)
 	dues_paid = models.DateField(blank=True, null=True)
 	avatar = models.URLField(blank=True)
@@ -73,7 +73,7 @@ class Request(models.Model):
 	email = models.EmailField()
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
-	year_level = models.CharField(max_length = 1, choices=YEAR_LEVELS, default="1")
+	year_level = models.CharField(max_length=1, choices=YEAR_LEVELS, default="1")
 	accepted = models.BooleanField(default=False)
 	was_checked = models.BooleanField(default=False, editable=False)
 	objects = RequestManager()
