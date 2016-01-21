@@ -46,7 +46,9 @@
         <div class="item"><a href="/blog">Blog</a></div>
         <div class="item"><a href="/members">Members</a></div>
         <div class="item"><a href="/events">Events</a></div>
+        {% if request.user.is_authenticated %}
         <div class="item"><a href="/files">More</a></div>
+        {% endif %}
       </div>
       <div class="footer" id="signin">
         {% if request.user.is_authenticated %}

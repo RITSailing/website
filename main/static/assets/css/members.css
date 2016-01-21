@@ -83,14 +83,12 @@ td {
 }
 
 #search {
-  border-radius: 25px;
   position: relative;
   z-index: 1;
 }
 
 .search.input-group {
   width: 100%;
-  padding: 0 .5em;
   margin-bottom: 1em;
 }
 
@@ -98,7 +96,7 @@ td {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 20px;
+  right: 10px;
   z-index: 2;
 }
 
