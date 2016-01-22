@@ -47,7 +47,7 @@
         <h4><b>Who's going?</b></h4>
         <div class="people-wrapper">
           <div class="people">
-            {% for person in event.going.all|slice:":6" %}
+            {% for person in event.going.all|slice:":20" %}
             <img class="avatar" src="{{person.avatar}}"/>
             {% endfor %}
           </div>

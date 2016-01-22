@@ -291,7 +291,7 @@ span {
   }
 }
 
-@media (min-width: 1030px){
+@media (min-width: 1100px){
   .col {
       width: 33.333333%;
   }
