@@ -1,9 +1,104 @@
+span {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.pin {
+  color: #f05a27;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1.25em;
+  padding: .25em .25em 0 0;
+  z-index: 30;
+}
+.carousel .item {
+  height: 40vh;
+}
+
+.carousel .item img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.carousel .item:after {
+  content: ' ';
+  position: absolute;
+  z-index: 5;
+  background: rgba(0,0,0,.3);
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.carousel .carousel-caption:hover h3 {
+  color: #ccc;
+}
+
+.carousel-caption p {
+    margin-bottom: 5px;
+}
+
+.carousel-caption span {
+  font-size: 12px;
+}
+
+.posts {
+  display: inline-flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.panel {
+    width: 100%;
+}
+
+.panel-body {
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+}
+
+.background img {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 20em;
+  max-height: 20em;
+  border-radius: 4px 4px 0 0;
+}
+
+.background:after {
+  content: ' ';
+  position: absolute;
+  z-index: 5;
+  background: rgba(0,0,0,.3);
+  width: 100%;
+  height: 100%;
+  display: block;
+  bottom: 0;
+}
+
 .header {
   display: flex;
+  padding: 15px;
   flex-direction: row;
   align-items: center;
+  white-space: nowrap;
   /*border-bottom: solid #000 1px;*/
-  padding: 0 1em;
+}
+
+.header.alt {
+  flex-direction: column;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  color: #fff;
+  align-items: flex-start;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .header .title h2 {
@@ -12,13 +107,6 @@
 
 #date {
   color: #333333;
-  margin-left: 1em;
-}
-
-.post {
-  position: relative;
-  border-top: solid 1px #E7E7E7;
-  padding-top: 1em;
 }
 
 .content {
@@ -33,9 +121,6 @@
 }
 
 .header span{
-  text-decoration: none;
-  text-transform: uppercase;
-  font-style: italic;
   font-size: 10px;
 }
 
@@ -57,7 +142,14 @@
 
 .header .avatar-wrapper .heading .extra {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.header .avatar-wrapper .extra .name {
+  display: flex;
+  flex-direction: column;
+  margin: 0 .5em .25em 0;
 }
 
 .endless_container {
@@ -108,5 +200,71 @@
   }
   40% {
     transform: scale(1);
+  }
+}
+
+.event {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+  .event .date {
+    margin: 1em auto;
+    display: table;
+    position: relative;
+  }
+
+  .event .date i {
+    font-size: 6em;
+  }
+
+  .event .date .text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    font-size: 15px;
+  }
+
+    .event .date .text span{
+      font-size: 15px;
+    }
+
+    .event .description h3 {
+      margin-top: 0;
+    }
+
+    .event .description p {
+      margin-bottom: 0;
+    }
+
+.col {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%
+}
+
+@media (min-width: 526px){
+  .col {
+      width: 50%;
+  }
+}
+
+@media (min-width: 1030px){
+  .col {
+      width: 33.333333%;
+  }
+}
+
+@media (min-width: 1800px){
+  .col {
+      width: 25%;
   }
 }
