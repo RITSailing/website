@@ -161,12 +161,15 @@ span {
 }
 
 .endless_loading {
+  display: -webkit-box;
   position: absolute;
-  top: 50%;
+  bottom: 0;
   left: 50%;
+  transform: translateX(-50%);
 }
 
 .loading-bar {
+  position: relative;
   display: inline-block;
   width: 4px;
   height: 18px;
@@ -249,6 +252,13 @@ span {
   padding-left: 15px;
   padding-right: 15px;
   width: 100%
+}
+
+.endless_container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media (min-width: 526px){

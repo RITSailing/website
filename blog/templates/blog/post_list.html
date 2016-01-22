@@ -63,7 +63,7 @@
 </div>
 {% endif %}
 <div id="main">
-  {% include page_template %}
+    {% include page_template %}
 </div>
 {% endblock %}
 
@@ -72,11 +72,15 @@
     <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
+      var $masonry = $('#main').masonry({
+        itemSelector: '.col',
+      });
       $('#content').endlessPaginate({
         paginateOnScroll: true,
         paginateOnScrollChunkSize: 1,
         onCompleted: function(data) {
-          console.log('New entries loaded.');
+          $masonry.masonry('reloadItems');
+          $masonry.masonry('layout');
         },
       });
       var win = $('#content'),
@@ -84,9 +88,6 @@
       win.scroll( function(){
         // console.log(doc.scrollTop());
         console.log(doc.height() - win.scrollTop());
-      });
-      $('.items').masonry({
-        itemSelector: '.col',
       });
     </script>
 {% endblock %}
