@@ -24,7 +24,7 @@
     </div>
   </div>
 </nav>
-<div class="image-header">
+<div class="image-header" {% if post.header_image = '' %} style="background: url('{% static 'assets/images/tile.jpg' %}');"{% endif %}>
   {% if post.header_image %}<img class="image" src="{{post.header_image.url}}"/>{% endif %}
   <div class="carousel-caption">
     <h3>{{post.title}}</h3>
