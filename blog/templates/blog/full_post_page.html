@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title>RIT Sailing | Blog</title>{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <button type="button" class="navbar-toggle collapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Home</a>
+    <div class="navbar-left">
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+        <li class="active">{{post.title}}</li>
+      </ol>
+    </div>
+  </div>
+</nav>
+<div class="image-header">
+  {% if post.header_image %}<img class="image" src="{{post.header_image.url}}"/>{% endif %}
+  <div class="carousel-caption">
+    <h3>{{post.title}}</h3>
+    <p>{{post.sub_title}}</p>
+    <span><i class="fa fa-calendar"></i> {{post.date}}</span>
+  </div>
+  <a href="{% url 'member' post.author.user.username %}"><div class="avatar-wrapper">
+    <img src="{{post.author.avatar}}"/>
+    <div class="heading">
+      {{post.author.user.first_name}} {{post.author.user.last_name}}
+      <span>{{post.author.eboard_pos}}</span>
+    </div>
+  </div></a>
+</div>
+<div id="main">
+  <div class="content">
+    {{post.content|safe}}
+  </div>
+</div>
+{% endblock %}

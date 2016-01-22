@@ -45,10 +45,12 @@
       </div>
       <div class="going">
         <h4><b>Who's going?</b></h4>
-        <div class="owl-carousel {{event.pk}}">
-          {% for person in event.going.all %}
-          <img class="avatar" src="{{person.avatar}}" data-toggle="tooltip" data-placement="bottom" title="{{person.full_name}}"/>
-          {% endfor %}
+        <div class="people-wrapper">
+          <div class="people">
+            {% for person in event.going.all|slice:":6" %}
+            <img class="avatar" src="{{person.avatar}}"/>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
@@ -64,31 +66,4 @@
   </div>
   {% endfor %}
 </div>
-{% endblock %}
-
-{% block js %}
-  <script src="{% static 'assets/js/owl_carousel/owl.carousel.min.js' %}"></script>
-  <script>
-  $(document).ready(function(){
-    {% for event in events %}
-    $(".owl-carousel.{{event.pk}}").owlCarousel({
-      'margin': 10,
-      responsive:{
-        480:{
-          items:4
-        },
-        678:{
-          items:5
-        },
-        960:{
-          items:6
-        },
-        1500: {
-          items:8
-        }
-      }
-    });
-    {% endfor %}
-  });
-  </script>
 {% endblock %}

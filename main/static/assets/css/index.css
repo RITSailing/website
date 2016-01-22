@@ -13,12 +13,37 @@ span {
   padding: .25em .25em 0 0;
   z-index: 30;
 }
-.carousel .item {
+.carousel .item, .image-header {
   height: 40vh;
+  position: relative;
+  overflow: hidden;
 }
 
-.carousel .item img {
+.image-header:after {
+  content: ' ';
+  height: 100%;
+  width: 100%;
   position: absolute;
+  z-index: 5;
+  opacity: .9;
+  background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+  background-image: -o-linear-gradient(bottom,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+  background-image: linear-gradient(to bottom,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+
+  .image-header .avatar-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    margin: 1em;
+  }
+
+.carousel .item img, .image-header img.image {
+  position: absolute;
+  max-width: 100%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
@@ -46,14 +71,13 @@ span {
   font-size: 12px;
 }
 
-.posts {
-  display: inline-flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
 .panel {
     width: 100%;
+}
+
+.panel:hover {
+  cursor: pointer;
+  opacity: .9;
 }
 
 .panel-body {
@@ -110,7 +134,7 @@ span {
 }
 
 .content {
-  padding: 1em 1.5em;
+  padding: 0 1.5em;
 }
 
 .post .sign {

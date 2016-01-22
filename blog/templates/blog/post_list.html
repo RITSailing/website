@@ -81,6 +81,9 @@
         onCompleted: function(data) {
           $masonry.masonry('reloadItems');
           $masonry.masonry('layout');
+          $('.panel').click(function (){
+            window.location = $(this).attr('href');
+          });
         },
       });
       var win = $('#content'),
@@ -88,6 +91,9 @@
       win.scroll( function(){
         // console.log(doc.scrollTop());
         console.log(doc.height() - win.scrollTop());
+      });
+      $('.panel').click(function (){
+        window.location = $(this).attr('href');
       });
     </script>
 {% endblock %}

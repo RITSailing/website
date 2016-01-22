@@ -6,7 +6,7 @@
   <div class="col">
     {% if item|classname = "Post" %}
     <div class="post">
-      <div class="panel panel-default">
+      <div class="panel panel-default" href="{% url 'post' item.pk %}">
         {% if item.pinned_post %}
         <span class="pin glyphicon glyphicon-pushpin" aria-hidden="true"></span>
         {% endif %}
@@ -46,7 +46,7 @@
     </div>
     {% elif item|classname = "Event" %}
     <div class="event">
-      <div class="panel panel-default">
+      <div class="panel panel-default" href="{% url 'event' item.pk %}">
         <div class="panel-body">
           <div class="date">
             <i class="fa fa-calendar-o"></i>
