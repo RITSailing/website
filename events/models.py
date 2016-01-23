@@ -3,6 +3,7 @@ from django.db import models
 from main.models import TeamMember
 
 class Event(models.Model):
+    organizer = models.ForeignKey(TeamMember, related_name="organizer")
     title = models.CharField(max_length = 50)
     description = models.CharField(max_length = 200, blank=True, null=True)
     date = models.DateField()

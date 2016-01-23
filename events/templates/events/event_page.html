@@ -25,5 +25,47 @@
   </div>
 </nav>
 <div id="main">
+  <div class="panel panel-default">
+    <div class="event single panel-body">
+      <div class="date">
+        <i class="fa fa-calendar-o"></i>
+        <div class="text">
+          {{event.get_month}}
+          <span>{{event.get_day}}</span>
+        </div>
+      </div>
+      <div class="description">
+        <h1>{{event.title}}</h1>
+        <p>{{event.description}}</p>
+      </div>
+      <div class="organized">
+        <h4><b>Organized by:</b></h4>
+        <a href="{% url 'member' request.user.username %}" class="avatar-wrapper">
+          <img src="{{member.avatar}}"/>
+          <div class="heading">
+            {{event.organizer.user.first_name}} {{event.organizer.user.last_name}}
+            <span>{{event.organizer.eboard_pos}}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="panel-footer">
+      {% if not event.closed_rsvp and request.user.is_authenticated %}
+        {% if member in event.going.all %}
+        <a href="{% url 'rm_rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="Remove RSVP"><i class="fa fa-calendar-times-o"></i></a>
+        {% else %}
+        <a href="{% url 'rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-calendar-plus-o"></i></a>
+        {% endif %}
+      {% endif %}
+      <div class="going">
+        <h4><b>Who's going?</b></h4>
+        <div class="people">
+          {% for person in event.going.all %}
+          <img class="avatar" src="{{person.avatar}}" data-toggle="tooltip" data-placement="bottom" title="{{person.full_name}}"/>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

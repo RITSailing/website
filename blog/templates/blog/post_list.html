@@ -62,7 +62,7 @@
   {% endif %}
 </div>
 {% endif %}
-<div id="main">
+<div id="masonry" style="margin-top: 1em; overflow:hidden;">
     {% include page_template %}
 </div>
 {% endblock %}
@@ -72,28 +72,31 @@
     <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
-      var $masonry = $('#main').masonry({
-        itemSelector: '.col',
-      });
-      $('#content').endlessPaginate({
-        paginateOnScroll: true,
-        paginateOnScrollChunkSize: 1,
-        onCompleted: function(data) {
-          $masonry.masonry('reloadItems');
-          $masonry.masonry('layout');
-          $('.panel').click(function (){
-            window.location = $(this).attr('href');
-          });
-        },
-      });
-      var win = $('#content'),
-            doc = $('#main');
-      win.scroll( function(){
-        // console.log(doc.scrollTop());
-        console.log(doc.height() - win.scrollTop());
-      });
-      $('.panel').click(function (){
-        window.location = $(this).attr('href');
+      $(document).ready(function (){
+        var $masonry = $('#masonry').masonry({
+          itemSelector: '.col',
+        });
+        $('#content').endlessPaginate({
+          paginateOnScroll: true,
+          paginateOnScrollChunkSize: 1,
+          onCompleted: function(data) {
+            $masonry.masonry('reloadItems');
+            $masonry.masonry('layout');
+            $('.panel').click(function (){
+              window.location = $(this).attr('href');
+            });
+          },
+        });
+        var win = $('#content'),
+              doc = $('#main');
+        win.scroll( function(){
+          // console.log(doc.scrollTop());
+          console.log(doc.height() - win.scrollTop());
+        });
+        $('.panel').click(function (){
+          window.location = $(this).attr('href');
+        });
+        setTimeout(function(){ $masonry.masonry('layout') }, 200);
       });
     </script>
 {% endblock %}

@@ -30,7 +30,7 @@
 </nav>
 <div id="main" class="event-list list-group">
   {% for event in events %}
-  <div class="panel panel-default">
+  <div class="panel panel-default" href="{% url 'event' event.pk %}">
     <div class="event panel-body">
       <div class="date">
         <i class="fa fa-calendar-o"></i>
@@ -66,4 +66,12 @@
   </div>
   {% endfor %}
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+  $('.panel').click(function (){
+    window.location = $(this).attr('href');
+  });
+</script>
 {% endblock %}
