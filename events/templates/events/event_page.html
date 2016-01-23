@@ -40,8 +40,8 @@
       </div>
       <div class="organized">
         <h4><b>Organized by:</b></h4>
-        <a href="{% url 'member' request.user.username %}" class="avatar-wrapper">
-          <img src="{{member.avatar}}"/>
+        <a href="{% url 'member' event.organizer.user.username %}" class="avatar-wrapper">
+          <img src="{{event.organizer.avatar}}"/>
           <div class="heading">
             {{event.organizer.user.first_name}} {{event.organizer.user.last_name}}
             <span>{{event.organizer.eboard_pos}}</span>
