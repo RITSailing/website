@@ -6,7 +6,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Post(models.Model):
     author = models.ForeignKey(TeamMember)
-    header_image = models.ImageField(blank=True, null=True)
+    header_image = models.ImageField(blank=True, null=True, upload_to="uploads/thumbs")
     title = models.CharField(max_length=100)
     sub_title = models.CharField(max_length=300)
     date = models.DateField(auto_now_add=True)

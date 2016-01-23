@@ -16,7 +16,7 @@ def main(request, template='blog/post_list.html', extra_context=None):
 	carousel = Post.objects.exclude(header_image__exact='').order_by('-date')[:3]
 	posts = Post.objects.exclude(pk__in=carousel)
 	items = list(posts.exclude(pinned_post=True)) + list(Event.objects.all())
-	sorted_items = list(Post.objects.filter(pinned_post=True)) + sorted(items, key=lambda x: x.date, reverse=True)
+	sorted_items = list(Post.objects.filter(pinned_post=True).order_by('-date')) + sorted(items, key=lambda x: x.date, reverse=True)
 	context = {
 		'version':version,
 		'page_template':page_template,

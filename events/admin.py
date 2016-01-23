@@ -33,8 +33,8 @@ class AdminInline(admin.TabularInline):
 class EventAdmin(admin.ModelAdmin):
 	inlines = [AdminInline]
 	exclude = ('going',)
-	list_display = ('title', 'date', 'end_date', 'closed_rsvp',)
+	list_display = ('title', 'start_date', 'end_date', 'closed_rsvp',)
 	list_filter = ('closed_rsvp',)
-	search_fields = ('name','date', 'end_date', )
+	search_fields = ('name','start_date', 'end_date', )
 
 admin.site.register(Event, EventAdmin)

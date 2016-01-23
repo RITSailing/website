@@ -16,5 +16,8 @@ class PostAdminForm(forms.ModelForm):
 
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
+    list_display = ('title', 'author', 'date', 'pinned_post',)
+    list_filter = ('pinned_post',)
+    search_fields = ('title','author', 'date', )
 
 admin.site.register(Post, PostAdmin)
