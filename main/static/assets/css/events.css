@@ -1,5 +1,5 @@
 .event-list {
-  padding: 3em;
+  padding: 1em;
 }
 
 .event {
@@ -49,11 +49,19 @@
     font-style: italic;
   }
 
-    .event .going .people {
-      display: flex;
-    }
+  .event .going .people-wrapper {
+      overflow: hidden;
+  }
+
+  .event .going .people {
+    display: inline-flex;
+  }
+
+  .event .going .people img:not(:first-child) {
+    margin-left: 1em;
+  }
 
     .event .going img.avatar {
-      height: auto;
+      height: 60px;
       width: 60px;
     }

@@ -12,6 +12,14 @@ def events(request, template):
 	version = settings.VERSION
 	return render(request, template, {'version':version, 'events':events, 'member':member})
 
+def event(request, pk, template="events/event_page.html",):
+	event = get_object_or_404(Event, pk=pk)
+	member = None
+	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
+		member = TeamMember.objects.get(user=request.user)
+	version = settings.VERSION
+	return render(request, template, {'event':event, 'version':version, 'events':events, 'member':member})
+
 def rsvp(request, pk):
     next = request.GET.get('next', None)
     event = get_object_or_404(Event, pk=pk)
