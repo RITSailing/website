@@ -22,3 +22,5 @@ class EquipmentForm(forms.Form):
 # what is already there.
 
 # Set that up in models. Then talk to Gareth about the implementation of it.
+
+# Event types.
