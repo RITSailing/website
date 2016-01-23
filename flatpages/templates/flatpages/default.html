@@ -31,8 +31,8 @@
       </ul>
   </div>
 </nav>
-<div id="main">
-  {{ flatpage.content }}
+<div style="overflow-x:hidden;">
+  {{ flatpage.content|safe }}
 </div>
 {% endblock%}
 

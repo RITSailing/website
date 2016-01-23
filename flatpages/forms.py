@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from flatpages.models import FlatPage
 from django.utils.translation import ugettext, ugettext_lazy as _
-from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class FlatpageForm(forms.ModelForm):
     url = forms.RegexField(label=_("URL"), max_length=100, regex=r'^[-\w/\.~]+$',
@@ -13,7 +13,7 @@ class FlatpageForm(forms.ModelForm):
                          " dots, underscores, dashes, slashes or tildes."),
         },
     )
-    content = forms.CharField(widget=CKEditorWidget())
+    content = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = FlatPage
@@ -37,19 +37,9 @@ class FlatpageForm(forms.ModelForm):
 
     def clean(self):
         url = self.cleaned_data.get('url')
-        sites = self.cleaned_data.get('sites')
 
         same_url = FlatPage.objects.filter(url=url)
         if self.instance.pk:
             same_url = same_url.exclude(pk=self.instance.pk)
-
-        if sites and same_url.filter(sites__in=sites).exists():
-            for site in sites:
-                if same_url.filter(sites=site).exists():
-                    raise forms.ValidationError(
-                        _('Flatpage with url %(url)s already exists for site %(site)s'),
-                        code='duplicate_url',
-                        params={'url': url, 'site': site},
-                    )
 
         return super(FlatpageForm, self).clean()
