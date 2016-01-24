@@ -180,7 +180,7 @@ img.avatar.small {
 }
 
 .avatar-wrapper {
-  display: -webkit-box;
+  display: -webkit-inline-box;
   -webkit-transition: color .25s;
   transition: color .25s;
   position: relative;

@@ -50,13 +50,15 @@
       </div>
     </div>
     <div class="panel-footer">
-      {% if member in event.going.all %}
-      <a href="{% url 'rm_rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="Remove RSVP"><i class="fa fa-calendar-times-o"></i></a>
-      {% elif not event.closed_rsvp and request.user.is_authenticated %}
-      <a href="{% url 'rsvp_event' event.pk %}" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-calendar-plus-o"></i></a>
-      {% endif %}
       <div class="going">
-        <h4><b>Who's going?</b></h4>
+        <div style="display:flex; align-items: center;">
+          <h4><b>Who's going?</b></h4>
+          {% if member in event.going.all %}
+          <a href="{% url 'rm_rsvp_event' event.pk %}?next={% url 'event' event.pk %}" style="margin-left: 1em;" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="Remove RSVP"><i class="fa fa-calendar-times-o"></i></a>
+          {% elif not event.closed_rsvp and request.user.is_authenticated %}
+          <a href="{% url 'rsvp_event' event.pk %}?next={% url 'event' event.pk %}" style="margin-left: 1em;" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="bottom" title="RSVP"><i class="fa fa-calendar-plus-o"></i></a>
+          {% endif %}
+        </div>
         <div class="people">
           {% for person in event.going.all %}
           <img class="avatar" src="{{person.avatar}}" data-toggle="tooltip" data-placement="bottom" title="{{person.full_name}}"/>

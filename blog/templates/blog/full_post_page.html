@@ -27,17 +27,14 @@
 <div class="image-header" {% if post.header_image = '' %} style="background-image: url('{% static 'assets/images/background.png' %}');"{% endif %}>
   {% if post.header_image %}<img class="image" src="{{post.header_image.url}}"/>{% endif %}
   <div class="carousel-caption">
+    <a href="{% url 'member' post.author.user.username %}"><div class="avatar-wrapper">
+      <img src="{{post.author.avatar}}"/>
+    </div></a>
     <h3>{{post.title}}</h3>
     <p>{{post.sub_title}}</p>
     <span><i class="fa fa-calendar"></i> {{post.date}}</span>
+    <span><i class="fa fa-user"></i> {{post.author.full_name}}</span>
   </div>
-  <a href="{% url 'member' post.author.user.username %}"><div class="avatar-wrapper">
-    <img src="{{post.author.avatar}}"/>
-    <div class="heading">
-      {{post.author.user.first_name}} {{post.author.user.last_name}}
-      <span>{{post.author.eboard_pos}}</span>
-    </div>
-  </div></a>
 </div>
 <div id="main">
   <div class="content">

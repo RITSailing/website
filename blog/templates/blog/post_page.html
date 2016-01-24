@@ -14,9 +14,7 @@
           {% if item.header_image = '' %}
           <div class="header">
             <div class="avatar-wrapper">
-              <a href="{% url 'member' item.author.user.username %}">
-                <img src="{{item.author.avatar}}"/>
-              </a>
+              <img src="{{item.author.avatar}}"/>
               <div class="heading">
                 <div class="extra">
                   <div class="name">

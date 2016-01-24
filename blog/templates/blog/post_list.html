@@ -38,12 +38,15 @@
   <div class="carousel-inner" role="listbox">
     {% for post in carousel %}
     <div class="item {% if forloop.first %}active{% endif %}">
-      <div class="overlay"></div>
-      <img src="{{post.header_image.url}}">
+      <img class="background" src="{{post.header_image.url}}">
       <a href="{% url 'post' post.pk %}"><div class="carousel-caption">
+        <div class="avatar-wrapper">
+          <img src="{{post.author.avatar}}"/>
+        </div>
         <h3>{{post.title}}</h3>
         <p>{{post.sub_title}}</p>
         <span><i class="fa fa-calendar"></i> {{post.date}}</span>
+        <span><i class="fa fa-user"></i> {{post.author.full_name}}</span>
       </div></a>
     </div>
     {% endfor %}
