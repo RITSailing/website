@@ -5,6 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>RIT Sailing | Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-touch-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'favicon/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'favicon/android-chrome-192x192.png' %}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{% static 'favicon/favicon-96x96.png' %}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{% static 'favicon/favicon-16x16.png' %}" sizes="16x16">
+    <link rel="manifest" href="{% static 'favicon/manifest.json' %}">
+    <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#f05a28">
+    <meta name="apple-mobile-web-app-title" content="RIT Sailing Club">
+    <meta name="application-name" content="RIT Sailing Club">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="{% static 'favicon/mstile-144x144.png' %}">
+    <meta name="theme-color" content="#f05a28">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/select/bootstrap-select.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
@@ -35,25 +55,25 @@
           </div>
       {% endfor %}
       <div class="row">
-        <div class="col-md-6 col-centered">
+        <div class="col col-md-6 col-centered">
           {{form.email}}
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col col-md-6">
           {{form.first_name}}
         </div>
-        <div class="col-md-6">
+        <div class="col col-md-6">
           {{form.last_name}}
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-centered">
+        <div class="col col-md-6 col-centered">
           {{form.year_level}}
         </div>
       </div>
       <div class="row">
-        <button type="submit" class="submit">Submit</button>
+        <button type="submit" class="col submit">Submit</button>
       </div>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

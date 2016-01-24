@@ -1,29 +1,68 @@
 {% load el_pagination_tags %}
+{% load blog_extras %}
 
-{% if posts %}
-{% paginate posts %}
-{% for post in posts %}
-<div class="post">
-    <div class="header">
-      <div class="title">
-        <h2>{{post.title}}</h2>
-        <span id="date"><i class="fa fa-calendar"></i> {{post.date}}</span>
-      </div>
-      <a href="{% url 'member' post.author.user.username %}" class="avatar-wrapper">
-        <img src="{{post.author.avatar}}"/>
-        <div class="heading">
-          {{post.author.user.first_name}} {{post.author.user.last_name}}
-          <span>{{post.author.eboard_pos}}</span>
+{% lazy_paginate 6,3 items %}
+  {% for item in items %}
+  <div class="col">
+    {% if item|classname = "Post" %}
+    <div class="post">
+      <div class="panel panel-default" href="{% url 'post' item.pk %}">
+        {% if item.pinned_post %}
+        <span class="pin glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+        {% endif %}
+        <div class="panel-body">
+          {% if item.header_image = '' %}
+          <div class="header">
+            <div class="avatar-wrapper">
+              <a href="{% url 'member' item.author.user.username %}">
+                <img src="{{item.author.avatar}}"/>
+              </a>
+              <div class="heading">
+                <div class="extra">
+                  <div class="name">
+                    {{item.author.user.first_name}} {{item.author.user.last_name}}
+                    <span>{{item.author.eboard_pos}}</span>
+                  </div>
+                  <span id="date"><i class="fa fa-calendar"></i> {{item.date}}</span>
+                </div>
+                <h4 class="title">{{item.title}}</h4>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="background">
+            <img src="{{item.header_image.url}}"/>
+          </div>
+          <div class="header alt">
+            <h4 class="title">{{item.title}}</h4>
+            <span><i class="fa fa-calendar"></i> {{item.date}}</span>
+          </div>
+          {% endif %}
         </div>
-      </a>
+        <div class="panel-footer">
+          {{item.sub_title}}
+        </div>
+      </div>
     </div>
-    <div class="content">
-      {{post.content|safe}}
+    {% elif item|classname = "Event" %}
+    <div class="event">
+      <div class="panel panel-default" href="{% url 'event' item.pk %}">
+        <div class="panel-body">
+          <div class="date">
+            <i class="fa fa-calendar-o"></i>
+            <div class="text">
+              {{item.get_month}}
+              <span>{{item.get_day}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer description">
+          <h3>{{item.title}}</h3>
+          {{item.description}}
+        </div>
+      </div>
     </div>
-    <!-- <a href="{% url 'post' post.pk %}" class="sign">Read More</a> -->
-</div>
-{% endfor %}
-{% show_more %}
-{% else %}
-<h6>There are no more posts to display.</h6>
-{% endif %}
+    {% endif %}
+  </div>
+  {% endfor %}
+{% show_more "Load More" %}

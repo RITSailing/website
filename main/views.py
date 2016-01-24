@@ -94,12 +94,13 @@ def fill_member_info(new, image, member, email):
 	# 	send_conformation_email(email)
 
 def send_conformation_email(name, email):
-	d = Context({ 'name': name, 'domain':settings.DOMAIN })
-	text_content = loader.get_template('main/request_email.txt').render(d)
-	html_content = loader.get_template('main/request_email.html').render(d)
-	msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
-	msg.attach_alternative(html_content, "text/html")
-	msg.send()
+	if not settings.DEBUG:
+		d = Context({ 'name': name, 'domain':settings.DOMAIN })
+		text_content = loader.get_template('main/request_email.txt').render(d)
+		html_content = loader.get_template('main/request_email.html').render(d)
+		msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
 
 def page(request, template):
 	member = None
@@ -107,7 +108,17 @@ def page(request, template):
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
 		member = TeamMember.objects.get(user=request.user)
 	version = settings.VERSION
-	return render(request, template, {'version':version, 'members':members, 'member':member})
+	return render(request, template, {'version':version, 'members':members, 'member':member, 'page_template':'main/member.html'})
+
+def search_members(request):
+    if request.method == "GET":
+        search_text = str(request.GET['search_text']).lower()
+        if search_text is not None and search_text != u"":
+            search_text = request.GET['search_text']
+            members = TeamMember.objects.search(query = search_text)
+        else:
+            members = TeamMember.objects.all()
+        return render(request, 'main/member.html', {'members':members})
 
 def profile(request, username):
 	user = get_object_or_404(User, username=username)

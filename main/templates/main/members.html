@@ -14,7 +14,7 @@
     <a class="navbar-brand" href="/members">Members</a>
     <div class="navbar-left">
       <ol class="breadcrumb">
-        <li class="active">members</li>
+        <li class="active"><i class="fa fa-users"></i></li>
       </ol>
     </div>
     <!-- <form class="navbar-form navbar-right" role="search">
@@ -28,50 +28,18 @@
   </div>
 </nav>
 <div id="main">
+  <div class="search input-group">
+      <input type="text" class="form-control" placeholder="Search" name="srch-term" id="search">
+      <i class="glyphicon glyphicon-search"></i>
+  </div>
   <table class="members table table-striped table-hover">
-      {% for m in members %}
-      <tr class="member" href="{% url 'member' m.user.username %}">
-        <td class="name">
-          <div class="col avatar-wrapper alt">
-            <img src="{{m.avatar}}"/>
-            <div class="heading">
-              {{m.user.first_name}} {{m.user.last_name}}
-              <span>{{m.eboard_pos}}</span>
-            </div>
-          </div>
-          <div class="badges">
-            {% if m.user.is_superuser %}
-            <i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="Admin"></i>
-            {% endif %}
-            {% if m.user.is_staff %}
-            <i class="fa fa-users" data-toggle="tooltip" data-placement="bottom" title="Board Member"></i>
-            {% endif %}
-          </div>
-        </td>
-        <td class="details">
-          <div class="detail">
-            <div class="item">
-              <h6>Year Level</h6>
-              <p>{{m.get_year_level_display}}</p>
-            </div>
-          </div>
-          <div class="detail">
-            <div class="item">
-              <h6>Sailing Level</h6>
-              <p>{{m.get_sailing_level_display}}</p>
-            </div>
-          </div>
-          {% if request.user.is_staff %}
-          <div class="detail">
-            <div class="item">
-              <h6>Dues Paid</h6>
-              <p>{{m.is_dues_paid}}</p>
-            </div>
-          </div>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
+    {% include page_template %}
+    <div class="endless_loading loading" style="display: none;">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
   </table>
 </div>
 {% endblock %}
@@ -79,6 +47,31 @@
 <script>
   $('.member').click( function() {
       window.location = $(this).attr('href');
-  })
+  });
+  var timeout;
+  $(function() {
+    $('#search').keyup(function() {
+      timeout = setTimeout(function() { $('.endless_loading').css('display', 'initial') }, 500);
+      $.ajax({
+        type: "GET",
+        url: "/members/search/",
+        data: {
+          'search_text' : $('#search').val(),
+          'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+        },
+        success: searchSuccess,
+        dataType: 'html'
+      });
+    });
+  });
+  function searchSuccess(data, textStatus, jqXHR){
+      clearTimeout(timeout);
+      $('.endless_loading').css('display', 'none');
+      $('.members.table').html(data);
+      $('[data-toggle="tooltip"]').tooltip();
+      $('.member').click( function() {
+          window.location = $(this).attr('href');
+      });
+  }
 </script>
 {% endblock %}

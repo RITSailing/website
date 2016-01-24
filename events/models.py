@@ -3,8 +3,10 @@ from django.db import models
 from main.models import TeamMember
 
 class Event(models.Model):
+    organizer = models.ForeignKey(TeamMember, related_name="organizer")
     title = models.CharField(max_length = 50)
     description = models.CharField(max_length = 200, blank=True, null=True)
+    date = models.DateField(auto_now_add=True)
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     closed_rsvp = models.BooleanField(default=False, help_text="Whether or not to let members RSVP themselves. Used mostly for regattas.")

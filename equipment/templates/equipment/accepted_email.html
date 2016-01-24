@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+
+        a {
+          color: #e64610;
+          text-decoration: none;
+        }
+
+        a:hover, a:focus {
+          color: #9e300b;
+          text-decoration: underline;
+        }
+    </style>
+  </head>
+  <body>
+    <img src="{{domain}}{% static 'assets/images/logo.png' %}" style="max-width: 200px; max-height: 200px;"/>
+    <p>Hello {{name}},</p>
+    <p>
+      Your request for the equipment {{equipment}} has been accepted!<br />
+      To retrieve the requested equipment please contact the Quartermaster.<br />
+      Once you are finished with the item please make sure that it returns to the location it was previously.<br />
+      Also please report any damage to the item to the Quartermaster immediately.
+    </p>
+    <p>
+      Thank you!<br />
+      <b>The RIT Sailing Club</b>
+    </p>
+  </body>
+</html>
