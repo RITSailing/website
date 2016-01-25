@@ -30,6 +30,14 @@ YEAR_LEVELS = [
 		('6', 'Other'),
 ]
 
+PERMISSION_LEVELS = [
+		('0', 'Public'),
+		('1', 'Member'),
+		('2', 'Due Paying Member'),
+		('3', 'Eboard'),
+		('4', 'Admin'),
+]
+
 SAILING_LEVELS = (
 		('1', 'Beginner'),
 		('2', 'Intermediate'),
@@ -49,6 +57,18 @@ class TeamMember(models.Model):
 			return "Yes"
 		else:
 			return "No :'("
+	def get_permissions(self): 
+		if self.user.is_staff:
+			return 3
+		elif self.is_dues_paid():
+			return 2
+		elif self.user.is_superuser:
+			return 4
+		elif not self.is_dues_paid():
+			return 1
+		else:
+			return 0
+
 	def full_name(self):
 		return self.user.first_name + " " + self.user.last_name
 	def __str__(self):

@@ -19,7 +19,7 @@ from django.conf import settings
 
 # DO NOT TOUCH
 # This is a method overide for the auth_allowed step in the social authentication pipline
-# It is overrided so that we  can filter who can log in by the people that we have listed
+# It has been overridden so that we  can filter who can log in by the people that we have listed
 def auth_allowed(backend, details, response, *args, **kwargs):
 	email = details.get('email')
 	if email:
@@ -93,7 +93,7 @@ def fill_member_info(new, image, member, email):
 	# if new:
 	# 	send_conformation_email(email)
 
-def send_conformation_email(name, email):
+def send_confirmation_email(name, email):
 	if not settings.DEBUG:
 		d = Context({ 'name': name, 'domain':settings.DOMAIN })
 		text_content = loader.get_template('main/request_email.txt').render(d)
@@ -155,7 +155,7 @@ def register(request):
 		form = RegisterForm(request.POST, initial=data)
 		if form.is_valid():
 			membership_request = form.save()
-			send_conformation_email(membership_request.first_name, membership_request.email)
+			send_confirmation_email(membership_request.first_name, membership_request.email)
 			return HttpResponseRedirect('/register/success/')
 	else:
 		form = RegisterForm(initial=data)
