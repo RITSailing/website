@@ -57,7 +57,7 @@ class TeamMember(models.Model):
 			return "Yes"
 		else:
 			return "No :'("
-	def get_permissions(self): 
+	def get_permissions(self):
 		if self.user.is_staff:
 			return 3
 		elif self.is_dues_paid():
