@@ -7,6 +7,8 @@
     <meta property="og:image" content="{% static 'assets/images/logo.png' %}"/>
     {% block title %}<title>RIT Sailing</title>{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-touch-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-touch-icon-60x60.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-touch-icon-72x72.png' %}">
@@ -74,7 +76,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'assets/js/bootstrap/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.11/slideout.min.js"></script>
+    <script src="{% static 'assets/js/slideout.min.js' %}"></script>
     {% block js %}{% endblock %}
     <script>
       $(document).ready(function() {
@@ -82,7 +84,8 @@
           'panel': document.getElementById('content'),
           'menu': document.getElementById('sidebar'),
           'padding': $('#sidebar').width(),
-          'tolerance': 70
+          'tolerance': 70,
+          'grabWidth': 40,
         });
         var path = window.location.pathname.split('/')[1];
         if($('.nav .item a[href="/'+path+'"]').length){
