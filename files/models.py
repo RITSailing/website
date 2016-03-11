@@ -24,7 +24,7 @@ def file_path(instance, filename):
 	path = "/"
 	current = instance.parent
 	while(current != None):
-		path += current.slug + "/"
+		path = "/" + current.slug + path
 		current = current.parent
 	return 'files' + path + filename
 
