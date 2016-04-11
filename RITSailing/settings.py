@@ -15,9 +15,17 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-VERSION = 'alpha 0.3'
+VERSION = '1.0.1'
 DOMAIN = 'http://sail.rhosoft.co'
-EMAIL_DEFAULT_FROM = 'donotreply@sail.rhosoft.co'
+
+EMAIL_DEFAULT_FROM = 'RISC <donotreply@sail.rhosoft.co>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@sail.rhosoft.co'
+EMAIL_HOST_PASSWORD = '1750315970191ebfa1fd7b5ac17229b2'
+EMAIL_PORT = 587
+
+FACEBOOK = 'https://www.facebook.com/RITSailing/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

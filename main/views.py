@@ -95,7 +95,7 @@ def fill_member_info(new, image, member, email):
 
 def send_conformation_email(name, email):
 	if not settings.DEBUG:
-		d = Context({ 'name': name, 'domain':settings.DOMAIN })
+		d = Context({ 'name': name, 'domain':settings.DOMAIN, 'facebook':settings.FACEBOOK })
 		text_content = loader.get_template('main/request_email.txt').render(d)
 		html_content = loader.get_template('main/request_email.html').render(d)
 		msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
@@ -132,7 +132,7 @@ def profile(request, username):
 def edit_profile(request, username):
 	user = get_object_or_404(User, username=username)
 	view_member = get_object_or_404(TeamMember, user=user)
-	if user is not request.user and not request.user.is_staff:
+	if user.pk is not request.user.pk and not request.user.is_staff:
 		raise PermissionDenied
 	member = None
 	if request.user.is_authenticated() and TeamMember.objects.filter(user=request.user).first():
