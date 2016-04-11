@@ -16,8 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 VERSION = 'alpha 0.3'
-DOMAIN = 'http://sail.rhosoft.co'
-EMAIL_DEFAULT_FROM = 'donotreply@sail.rhosoft.co'
+DOMAIN = 'http://rocsailing.club'
+EMAIL_DEFAULT_FROM = 'donotreply@rocsailing.club'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -28,7 +28,7 @@ SECRET_KEY = '1%_28b4n7!&v7&6t1uz5ysmt0(_h)0k3_7%k0b(uvo2)5wj4*o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
+ALLOWED_HOSTS = ['localhost', 'www.rocsailing.club', 'rocsailing.club', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
 
 
 # Application definition
