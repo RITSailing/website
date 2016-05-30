@@ -34,7 +34,7 @@ FACEBOOK = 'https://www.facebook.com/groups/risailing/'
 SECRET_KEY = '1%_28b4n7!&v7&6t1uz5ysmt0(_h)0k3_7%k0b(uvo2)5wj4*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['risc.gser.co', 'www.rocsailing.club', 'rocsailing.club', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
 
