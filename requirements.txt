@@ -3,3 +3,6 @@ python-social-auth
 django-phonenumber-field
 django-ckeditor
 django-el-pagination
+gunicorn
+dj-database-url
+psycopg2

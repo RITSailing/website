@@ -81,9 +81,9 @@ class Request(models.Model):
 		return str(self.first_name) + " " + str(self.last_name)
 	def save(self, **kwargs):
 		if not settings.DEBUG and self.accepted and not self.was_checked:
-			d = Context({ 'name': self.first_name, 'domain':settings.DOMAIN, 'facebook':settings.FACEBOOK })
-			text_content = loader.get_template('main/accepted_email.txt').render(d)
-			html_content = loader.get_template('main/accepted_email.html').render(d)
+			params = { 'name': self.first_name, 'domain':settings.DOMAIN, 'facebook':settings.FACEBOOK }
+			text_content = loader.get_template('main/accepted_email.txt').render(params)
+			html_content = loader.get_template('main/accepted_email.html').render(params)
 			msg = EmailMultiAlternatives('Sailing Membership Request Accepted', text_content, settings.EMAIL_DEFAULT_FROM, [self.email])
 			msg.attach_alternative(html_content, "text/html")
 			msg.send()

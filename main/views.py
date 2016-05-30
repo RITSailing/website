@@ -95,12 +95,12 @@ def fill_member_info(new, image, member, email):
 
 def send_conformation_email(name, email):
 	if not settings.DEBUG:
-		d = Context({ 'name': name, 'domain':settings.DOMAIN, 'facebook':settings.FACEBOOK })
-		text_content = loader.get_template('main/request_email.txt').render(d)
-		html_content = loader.get_template('main/request_email.html').render(d)
-		msg = EmailMultiAlternatives('Sailing Membership Request Conformation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
+		params = { 'name': name, 'domain':settings.DOMAIN, 'facebook':settings.FACEBOOK }
+		text_content = loader.get_template('main/request_email.txt').render(params)
+		html_content = loader.get_template('main/request_email.html').render(params)
+		msg = EmailMultiAlternatives('Sailing Membership Request Confirmation', text_content, settings.EMAIL_DEFAULT_FROM, [email])
 		msg.attach_alternative(html_content, "text/html")
-		msg.send()
+		msg.send(fail_silently=False)
 
 def page(request, template):
 	member = None
