@@ -1,4 +1,4 @@
-from social.exceptions import AuthForbidden
+from social_core.exceptions import AuthForbidden
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
 from django.template import loader, Context
@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from social.pipeline.user import USER_FIELDS
+from social_core.pipeline.user import USER_FIELDS
 from .models import TeamMember, Request
 from .responseutils import HttpRedirectException
 from .forms import RegisterForm, ProfileForm
