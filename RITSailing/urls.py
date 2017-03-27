@@ -36,5 +36,5 @@ urlpatterns = [
     url(r'^(?P<url>.*/)$', views.flatpage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = 'RISC Admin'
+admin.site.site_header = 'RIT Sailing Admin'
 admin.site.site_title = 'Sailing Admin'

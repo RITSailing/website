@@ -18,11 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = '1.0.1'
 DOMAIN = 'http://sail.rhosoft.co'
 
-EMAIL_DEFAULT_FROM = 'RISC <donotreply@sail.rhosoft.co>'
+EMAIL_DEFAULT_FROM = 'RIT Sailing <donotreply@sail.rhosoft.co>'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_HOST_USER = 'postmaster@sail.rhosoft.co'
-EMAIL_HOST_PASSWORD = '1750315970191ebfa1fd7b5ac17229b2'
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_PASSWORD')
 EMAIL_PORT = 587
 
 FACEBOOK = 'https://www.facebook.com/RITSailing/'
@@ -110,7 +110,7 @@ DATABASES = {
 }
 
 # If production update database to match
-if os.environ.get('DOKKU_POSTGRES_WHITE_URL') is not None:
+if os.environ.get('DATABASE_URL') is not None:
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
@@ -121,7 +121,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1064425529245-pqim9pko5o98p7v5u4mplaa312enh5f7'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nPlHXdbLreHiImw7F3oP5tpS'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_OAUTH_SECRET')
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',

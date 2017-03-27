@@ -1,6 +1,6 @@
 <p align="center"><img src="https://raw.githubusercontent.com/rit-sailing/website/master/main/static/assets/images/logo.png" width="200"></p>
-# RISC Website
-The is the website created for the RISC club.
+# RIT Sailing Website
+The is the website created for the RIT Sailing club.
 It is written in python and uses a framework called [Django](https://www.djangoproject.com/)
 
 ## Requirements
