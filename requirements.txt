@@ -1,5 +1,5 @@
-django
-python-social-auth
+django==1.9
+social-auth-app-django
 django-phonenumber-field
 django-ckeditor
 django-el-pagination
