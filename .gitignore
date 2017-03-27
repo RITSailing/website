@@ -1,6 +1,9 @@
 db.sqlite3
 media/files
 
+.DS_Store
+*.pyc
+
 *.rej
 
 # Byte-compiled / optimized / DLL files
