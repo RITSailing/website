@@ -34,9 +34,9 @@ FACEBOOK = 'https://www.facebook.com/RITSailing/'
 SECRET_KEY = '1%_28b4n7!&v7&6t1uz5ysmt0(_h)0k3_7%k0b(uvo2)5wj4*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
+ALLOWED_HOSTS = ['risc.gser.co', 'www.rocsailing.club', 'rocsailing.club', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
 
 
 # Application definition
@@ -110,6 +110,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# If production update database to match
+if os.environ.get('DATABASE_URL') is not None:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',

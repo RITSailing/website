@@ -1,8 +1,8 @@
 Hello {{name}},
 
 Your request to join the Sailing Club has been accepted!
-To setup your account please login using your RIT Google account on our webpage ({{domain}}/).
+To setup your account please login using your Google account on our webpage ({{domain}}/).
 From there you can view documents, request equipment, RSVP to events, and much more.
 
 We'll see you on the water!
-The RIT Sailing Club
+The Rochester Intercollegiate Sailing Club

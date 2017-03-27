@@ -1,5 +1,9 @@
 django==1.9
 social-auth-app-django
+Pillow
 django-phonenumber-field
 django-ckeditor
 django-el-pagination
+gunicorn
+dj-database-url
+psycopg2
