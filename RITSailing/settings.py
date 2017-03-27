@@ -60,8 +60,6 @@ INSTALLED_APPS = [
     'el_pagination',
 ]
 
-SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -112,7 +110,7 @@ DATABASES = {
 }
 
 # If production update database to match
-if os.environ.get('DATABASE_URL') is not None:
+if os.environ.get('DOKKU_POSTGRES_WHITE_URL') is not None:
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
