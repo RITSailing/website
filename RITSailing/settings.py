@@ -16,12 +16,12 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 VERSION = '1.0.1'
-DOMAIN = 'http://sail.rhosoft.co'
+DOMAIN = 'http://sail.gser.co'
 
-EMAIL_DEFAULT_FROM = 'RIT Sailing <donotreply@sail.rhosoft.co>'
+EMAIL_DEFAULT_FROM = 'RIT Sailing <donotreply@sail.gser.co>'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_HOST_USER = 'postmaster@sail.rhosoft.co'
+EMAIL_HOST_USER = 'postmaster@sail.gser.co'
 EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_PASSWORD')
 EMAIL_PORT = 587
 
@@ -35,7 +35,7 @@ FACEBOOK = 'https://www.facebook.com/RITSailing/'
 SECRET_KEY = os.environ.get('SECRET_KEY') if os.environ.get('SECRET_KEY') is not None else 'local-test-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['sail.gser.co', 'www.sail.gser.co', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
 
