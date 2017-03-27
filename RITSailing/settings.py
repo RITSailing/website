@@ -31,13 +31,13 @@ FACEBOOK = 'https://www.facebook.com/RITSailing/'
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1%_28b4n7!&v7&6t1uz5ysmt0(_h)0k3_7%k0b(uvo2)5wj4*o'
+
+SECRET_KEY = os.environ.get('SECRET_KEY') if os.environ.get('SECRET_KEY') is not None else 'local-test-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['risc.gser.co', 'www.rocsailing.club', 'rocsailing.club', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
-
+ALLOWED_HOSTS = ['sail.gser.co', 'www.sail.gser.co', 'sail.rhosoft.co', 'www.sail.rhosoft.co']
 
 # Application definition
 
