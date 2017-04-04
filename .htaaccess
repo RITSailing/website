@@ -1,0 +1,2 @@
+AddHandler fcgid-script .fcgi
+DirectoryIndex index.fcgi
