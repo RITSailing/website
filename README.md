@@ -35,8 +35,5 @@ password: thisisapass
 ## Issues and Feature Requests
 Please submit all bugs, issues and feature requests in the issues section of the github repo.
 
-## Task Management
-We are using Taiga to do our task management. [Check out our board](https://tree.taiga.io/project/gdaunton-rit-sailing-website) to see what we are up to!
-
 ## Pull Requests
 We do accept and look through pull requests. If you have a feature or fix send it our way!
